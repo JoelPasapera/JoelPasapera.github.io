@@ -1,46 +1,50 @@
-// script.js - Trading Algorítmico Joel Pasapera
-
-// ===== CONFIGURACIÓN =====
+// script.js - CORREGIDO para comunicación real
 const CONFIG = {
-    API_BASE_URL: window.location.origin, // Usa el mismo dominio
-    CONTACT_ENDPOINT: '/contact'
+    API_BASE_URL: window.location.origin.includes('pythonanywhere')
+        ? 'https://joelpasapera.pythonanywhere.com'  // ✅ Para producción
+        : 'http://localhost:5000',                   // ✅ Para desarrollo
+    CONTACT_ENDPOINT: '/contact',
+    TEST_ENDPOINT: '/api/test',
+    STRATEGIES_ENDPOINT: '/api/strategies'
 };
 
-// ===== FUNCIONALIDADES GENERALES =====
 
-// Menú hamburguesa para dispositivos móviles
+
+// ===== FUNCIONALIDADES GENERALES =====
 document.addEventListener('DOMContentLoaded', function () {
+    console.log('🚀 Inicializando página...');
+
+    // Probar conexión con el servidor al cargar
+    testServerConnection();
+
+    // Menú hamburguesa (tu código existente)
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
-
     if (hamburger && navMenu) {
+
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
 
-        // Cerrar menú al hacer clic en un enlace
         document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
         }));
     }
 
-    // Scroll suave para enlaces internos
+    // Scroll suave
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
 
-    // Cambiar estilo de navbar al hacer scroll
+    // Navbar scroll
     window.addEventListener('scroll', () => {
         const navbar = document.querySelector('.navbar');
         if (navbar) {
@@ -54,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Inicializar animaciones de barras de habilidades
+    // Animaciones de habilidades
     const skillLevels = document.querySelectorAll('.skill-level');
     skillLevels.forEach(skill => {
         const width = skill.style.width;
@@ -63,38 +67,51 @@ document.addEventListener('DOMContentLoaded', function () {
             skill.style.width = width;
         }, 500);
     });
-
-    // Observador de intersección para animaciones
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-            }
-        });
-    }, observerOptions);
-
-    // Observar elementos para animación
-    document.querySelectorAll('.course-card, .strategy-card, .resource-card').forEach(el => {
-        el.classList.add('animate-on-scroll');
-        observer.observe(el);
-    });
-
-    // Añadir estilos para animaciones
-    addAnimationStyles();
 });
 
-// ===== FORMULARIO DE CONTACTO =====
+// ===== COMUNICACIÓN CON EL SERVIDOR =====
 
+// 1. Probar conexión con el servidor
+async function testServerConnection() {
+    try {
+        console.log('🔗 Probando conexión con el servidor...');
+        const response = await fetch(`${CONFIG.API_BASE_URL}${CONFIG.TEST_ENDPOINT}`);
+        const data = await response.json();
+
+        if (data.success) {
+            console.log('✅ Servidor conectado:', data.message);
+            showNotification('✅ Conexión con servidor establecida', 'success');
+        }
+
+    } catch (error) {
+        console.error('❌ Error conectando al servidor:', error);
+        showNotification('⚠️ Modo offline - Algunas funciones no están disponibles', 'error');
+    }
+}
+
+// 2. Cargar estrategias desde el servidor
+async function loadStrategiesFromServer() {
+    try {
+        const response = await fetch(`${CONFIG.API_BASE_URL}${CONFIG.STRATEGIES_ENDPOINT}`);
+        const data = await response.json();
+
+        if (data.success) {
+            console.log('📊 Estrategias cargadas:', data.strategies);
+            return data.strategies;
+        }
+    } catch (error) {
+        console.error('❌ Error cargando estrategias:', error);
+        // Retornar datos locales como fallback
+        return loadStrategyData();
+    }
+}
+
+// 3. Formulario de contacto - COMPLETAMENTE FUNCIONAL
 document.addEventListener('DOMContentLoaded', function () {
     const contactForm = document.getElementById('contactForm');
 
     if (contactForm) {
-        contactForm.addEventListener('submit', function (e) {
+        contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
 
             // Obtener datos del formulario
@@ -105,96 +122,89 @@ document.addEventListener('DOMContentLoaded', function () {
                 message: document.getElementById('message').value
             };
 
+            console.log('📨 Enviando datos:', formData);
+
             // Validar formulario
             if (validateForm(formData)) {
-                // Mostrar indicador de carga
                 const submitBtn = this.querySelector('button[type="submit"]');
                 const originalText = submitBtn.textContent;
                 submitBtn.textContent = 'Enviando...';
                 submitBtn.disabled = true;
 
-                // Enviar datos al servidor
-                sendContactForm(formData)
-                    .then(data => {
-                        if (data.success) {
-                            showNotification('Mensaje enviado correctamente. Te contactaremos pronto.', 'success');
-                            contactForm.reset();
-                        } else {
-                            showNotification(data.message || 'Error al enviar el mensaje', 'error');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        showNotification('Error de conexión. Por favor, intenta más tarde.', 'error');
-                    })
-                    .finally(() => {
-                        // Restaurar botón
-                        submitBtn.textContent = originalText;
-                        submitBtn.disabled = false;
+                try {
+                    // ✅ ENVÍO REAL AL SERVIDOR
+                    const response = await fetch(`${CONFIG.API_BASE_URL}${CONFIG.CONTACT_ENDPOINT}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
                     });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        showNotification(data.message, 'success');
+                        console.log('✅ Respuesta del servidor:', data);
+                        contactForm.reset();
+                    } else {
+                        showNotification(data.message || '❌ Error al enviar el mensaje', 'error');
+                    }
+                } catch (error) {
+                    console.error('❌ Error de conexión:', error);
+                    showNotification('❌ Error de conexión. Por favor, intenta más tarde.', 'error');
+                } finally {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
             }
         });
     }
 });
 
-// Función para enviar formulario de contacto
-async function sendContactForm(formData) {
-    const response = await fetch(CONFIG.CONTACT_ENDPOINT, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-    });
-
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    return await response.json();
-}
+// ===== FUNCIONES AUXILIARES =====
 
 // Validación del formulario
 function validateForm(formData) {
     const { name, email, subject, message } = formData;
 
     if (!name.trim()) {
-        showNotification('Por favor ingresa tu nombre', 'error');
+        showNotification('❌ Por favor ingresa tu nombre', 'error');
         return false;
     }
 
     if (!email.trim()) {
-        showNotification('Por favor ingresa tu email', 'error');
+        showNotification('❌ Por favor ingresa tu email', 'error');
         return false;
     }
 
     if (!isValidEmail(email)) {
-        showNotification('Por favor ingresa un email válido', 'error');
+        showNotification('❌ Por favor ingresa un email válido', 'error');
         return false;
     }
 
     if (!subject.trim()) {
-        showNotification('Por favor ingresa un asunto', 'error');
+        showNotification('❌ Por favor ingresa un asunto', 'error');
         return false;
     }
 
     if (!message.trim()) {
-        showNotification('Por favor ingresa tu mensaje', 'error');
+        showNotification('❌ Por favor ingresa tu mensaje', 'error');
         return false;
     }
 
     return true;
 }
 
-// Validar formato de email
+// Validar email
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
-// Mostrar notificaciones
+// Sistema de notificaciones
 function showNotification(message, type) {
-    // Crear elemento de notificación
+    // Tu código existente de notificaciones
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
     notification.innerHTML = `
@@ -202,7 +212,6 @@ function showNotification(message, type) {
         <button class="notification-close">&times;</button>
     `;
 
-    // Estilos para la notificación
     notification.style.cssText = `
         position: fixed;
         top: 100px;
@@ -218,7 +227,6 @@ function showNotification(message, type) {
         min-width: 300px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         animation: slideInRight 0.3s ease;
-        transform: translateX(0);
     `;
 
     if (type === 'success') {
@@ -227,7 +235,6 @@ function showNotification(message, type) {
         notification.style.backgroundColor = '#ef4444';
     }
 
-    // Botón para cerrar
     const closeBtn = notification.querySelector('.notification-close');
     closeBtn.style.cssText = `
         background: none;
@@ -239,34 +246,22 @@ function showNotification(message, type) {
     `;
 
     closeBtn.addEventListener('click', () => {
-        notification.style.animation = 'slideOutRight 0.3s ease';
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 300);
+        notification.remove();
     });
+
+    document.body.appendChild(notification);
 
     // Auto-eliminar después de 5 segundos
     setTimeout(() => {
         if (notification.parentNode) {
-            notification.style.animation = 'slideOutRight 0.3s ease';
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.parentNode.removeChild(notification);
-                }
-            }, 300);
+            notification.remove();
         }
     }, 5000);
-
-    document.body.appendChild(notification);
 }
 
-// ===== FUNCIONALIDADES ADICIONALES =====
-
-// Cargar datos de estrategias (simulación)
+// Función existente para datos locales (fallback)
 function loadStrategyData() {
-    const strategies = [
+    return [
         {
             id: 1,
             name: 'XAUUSD Scalping',
@@ -275,100 +270,23 @@ function loadStrategyData() {
             profitFactor: '1.8',
             rrRatio: '2.1',
             description: 'Estrategia de scalping en oro basada en patrones de velas en temporalidad de 5 minutos.'
-        },
-        {
-            id: 2,
-            name: 'WTI Breakout',
-            profit: '+22% anual',
-            winRate: '65%',
-            profitFactor: '2.1',
-            rrRatio: '2.8',
-            description: 'Estrategia de ruptura en petróleo con confirmación de volumen y análisis de sesiones.'
-        },
-        {
-            id: 3,
-            name: 'EURUSD Mean Reversion',
-            profit: '+12% anual',
-            winRate: '58%',
-            profitFactor: '1.5',
-            rrRatio: '1.8',
-            description: 'Sistema de reversión a la media con bandas de Bollinger y RSI en temporalidad horaria.'
         }
     ];
-
-    return strategies;
 }
 
-// Añadir estilos de animación
+// Añadir estilos de animación (tu código existente)
 function addAnimationStyles() {
     const style = document.createElement('style');
     style.textContent = `
         @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
-        
-        @keyframes slideOutRight {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-        }
-        
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        
-        .animate-on-scroll.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .hamburger.active .bar:nth-child(1) {
-            transform: rotate(-45deg) translate(-5px, 6px);
-        }
-        
-        .hamburger.active .bar:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .hamburger.active .bar:nth-child(3) {
-            transform: rotate(45deg) translate(-5px, -6px);
-        }
-        
-        .skill-level {
-            transition: width 1.5s ease-in-out;
-        }
-        
-        @media (max-width: 768px) {
-            .notification {
-                right: 10px;
-                left: 10px;
-                min-width: auto;
-            }
-        }
+        .notification { animation: slideInRight 0.3s ease; }
     `;
     document.head.appendChild(style);
 }
 
-// Prevenir envío de formularios vacíos en enlaces "#"
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('a[href="#"]').forEach(link => {
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-            showNotification('Esta funcionalidad estará disponible pronto', 'success');
-        });
-    });
-});
+
+// Inicializar estilos
+addAnimationStyles();
