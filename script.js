@@ -8,10 +8,12 @@ const CONFIG = {
     STRATEGIES_ENDPOINT: '/api/strategies'
 };
 
+const API_URL = 'https://joelpasapera.pythonanywhere.com';
+
 // ===== FUNCIONALIDADES GENERALES =====
 document.addEventListener('DOMContentLoaded', function () {
     console.log('🚀 Inicializando página...');
-    console.log('🌐 URL Base:', CONFIG.API_BASE_URL);
+    console.log('🌐 URL Base:', API_URL); // CONFIG.API_BASE_URL
 
     // Probar conexión con el servidor al cargar
     testServerConnection();
@@ -281,4 +283,5 @@ function addAnimationStyles() {
         .notification { animation: slideInRight 0.3s ease; }
     `;
     document.head.appendChild(style);
+
 }
