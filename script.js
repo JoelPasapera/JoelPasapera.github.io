@@ -390,3 +390,80 @@ function addAnimationStyles() {
     document.head.appendChild(style);
 }
 
+
+// ===== OPTIMIZACIONES PARA MÓVILES =====
+
+// Detectar dispositivo móvil
+function isMobileDevice() {
+    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+}
+
+// Optimizar para touch
+function optimizeForTouch() {
+    // Aumentar área de click para elementos táctiles
+    const touchElements = document.querySelectorAll('.btn, .nav-link, .course-card, .strategy-card');
+    touchElements.forEach(element => {
+        element.style.minHeight = '44px';
+        element.style.minWidth = '44px';
+        element.style.display = 'flex';
+        element.style.alignItems = 'center';
+        element.style.justifyContent = 'center';
+    });
+}
+
+// Prevenir zoom en inputs (complementario al CSS)
+function preventZoomOnInput() {
+    const inputs = document.querySelectorAll('input, textarea, select');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            // Forzar tamaño de fuente de 16px para prevenir zoom en iOS
+            this.style.fontSize = '16px';
+        });
+        
+        input.addEventListener('blur', function() {
+            // Restaurar tamaño original si es necesario
+            if (window.innerWidth <= 768) {
+                this.style.fontSize = '16px';
+            } else {
+                this.style.fontSize = '';
+            }
+        });
+    });
+}
+
+// Optimizar scroll suave para móviles
+function optimizeSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                // Scroll más rápido en móviles
+                const scrollOptions = {
+                    behavior: 'smooth',
+                    block: 'start'
+                };
+                
+                if (isMobileDevice()) {
+                    // En móviles, usar scroll instantáneo o muy rápido
+                    target.scrollIntoView({ behavior: 'auto', block: 'start' });
+                } else {
+                    target.scrollIntoView(scrollOptions);
+                }
+            }
+        });
+    });
+}
+
+// Inicializar optimizaciones móviles
+document.addEventListener('DOMContentLoaded', function() {
+    if (isMobileDevice()) {
+        console.log('📱 Dispositivo móvil detectado - aplicando optimizaciones');
+        optimizeForTouch();
+        preventZoomOnInput();
+        optimizeSmoothScroll();
+        
+        // Agregar clase CSS para móviles
+        document.body.classList.add('mobile-device');
+    }
+});
