@@ -150,7 +150,7 @@ async function testServerConnection() {
 
         if (data.success) {
             console.log('✅ Servidor conectado:', data.message);
-            showNotification('✅ Conexión con servidor establecida', 'success');
+            // showNotification('✅ Conexión con servidor establecida', 'success');
         } else {
             console.error('❌ Servidor respondió con error:', data);
             showNotification('❌ Error en la respuesta del servidor', 'error');
@@ -389,3 +389,4 @@ function addAnimationStyles() {
     `;
     document.head.appendChild(style);
 }
+
