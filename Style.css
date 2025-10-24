@@ -2545,3 +2545,35 @@ p {
     user-zoom: fixed;
 }
 
+
+
+
+
+/* OPTIMIZACIONES */
+
+
+
+
+/* Clase específica para móviles */
+body.mobile-device {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+body.mobile-device a, 
+body.mobile-device button {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Mejorar rendimiento de scroll en iOS */
+body.mobile-device {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Optimizar botones para touch */
+body.mobile-device .btn {
+    cursor: pointer;
+    touch-action: manipulation;
+}
