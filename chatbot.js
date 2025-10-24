@@ -1,11 +1,4 @@
 // script.js - VERSIÓN ULTRA-CORREGIDA (CON MODE: CORS)
-const CONFIG = {
-    API_BASE_URL: 'https://joelpasapera.pythonanywhere.com',
-    CONTACT_ENDPOINT: '/contact',
-    TEST_ENDPOINT: '/api/test',
-    STRATEGIES_ENDPOINT: '/api/strategies',
-    CHAT_ENDPOINT: '/api/chat'
-};
 
 console.log('🚀 Script.js CARgado - Versión CORREGIDA');
 console.log('🌐 URL Base:', CONFIG.API_BASE_URL);
@@ -389,3 +382,4 @@ function addAnimationStyles() {
     `;
     document.head.appendChild(style);
 }
+
