@@ -39,6 +39,12 @@
 
         console.log('✅ Todos los elementos del chat encontrados');
 
+        // Mostrar mensaje de bienvenida al abrir el chat
+        function showWelcomeMessage() {
+            // El mensaje de bienvenida ya está en el HTML, así que no necesitamos agregarlo
+            console.log('💬 Chat iniciado - Mensaje de bienvenida mostrado');
+        }
+        
         // ✅ FUNCIÓN SIMPLIFICADA PARA ABRIR/CERRAR CHAT
         function toggleChat() {
             isChatOpen = !isChatOpen;
@@ -46,6 +52,11 @@
                 chatContainer.classList.add('active');
                 chatInput.focus();
                 console.log('📱 Chat abierto');
+                // Enfocar en el input después de una pequeña demora para asegurar la transición
+                setTimeout(() => {
+                    chatInput.focus();
+                }, 300);
+                
             } else {
                 chatContainer.classList.remove('active');
                 console.log('📱 Chat cerrado');
@@ -275,3 +286,4 @@
         console.log('   - ✅ Indicador de typing');
     }
 })();
+
