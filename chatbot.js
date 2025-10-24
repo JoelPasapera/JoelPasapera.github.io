@@ -1,286 +1,391 @@
-// chatbot.js - VERSIÓN COMPLETAMENTE CORREGIDA
-(function () {
-    'use strict';
+// script.js - VERSIÓN ULTRA-CORREGIDA (CON MODE: CORS)
+const CONFIG = {
+    API_BASE_URL: 'https://joelpasapera.pythonanywhere.com',
+    CONTACT_ENDPOINT: '/contact',
+    TEST_ENDPOINT: '/api/test',
+    STRATEGIES_ENDPOINT: '/api/strategies',
+    CHAT_ENDPOINT: '/api/chat'
+};
 
-    console.log('🚀 Iniciando chat funcional...');
+console.log('🚀 Script.js CARgado - Versión CORREGIDA');
+console.log('🌐 URL Base:', CONFIG.API_BASE_URL);
 
-    // Estado global
-    let isChatOpen = false;
-    let isProcessingMessage = false;
+// ===== FUNCIONALIDADES GENERALES =====
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('🚀 Inicializando página...');
+    console.log('🌐 URL Base configurada:', CONFIG.API_BASE_URL);
 
-    // ✅ CONFIGURACIÓN CORREGIDA - USAR SIEMPRE PRODUCCIÓN
-    const CONFIG = {
-        API_BASE_URL: 'https://joelpasapera.pythonanywhere.com',  // ✅ SIEMPRE producción
-        CHAT_ENDPOINT: '/api/chat'
-    };
+    // Probar conexión con el servidor al cargar
+    testServerConnection();
 
-    console.log('🌐 URL Base del Chat:', CONFIG.API_BASE_URL);
+    // Menú hamburguesa
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
 
-    // Esperar a que la página esté completamente cargada
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initializeFunctionalChat, false);
-    } else {
-        initializeFunctionalChat();
+        document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }));
     }
 
-    function initializeFunctionalChat() {
-        // Obtener elementos
-        const chatToggle = document.getElementById('chatToggle');
-        const chatContainer = document.getElementById('chatContainer');
-        const chatClose = document.getElementById('chatClose');
-        const chatMessages = document.getElementById('chatMessages');
-        const chatSend = document.getElementById('chatSend');
-        const chatInput = document.getElementById('chatInput');
-
-        if (!chatToggle || !chatContainer || !chatSend || !chatInput) {
-            console.error('❌ Elementos del chat no encontrados');
-            return;
-        }
-
-        console.log('✅ Todos los elementos del chat encontrados');
-
-        // ✅ CONFIGURAR EVENT LISTENERS PRIMERO
-        function setupEventListeners() {
-            console.log('🔧 Configurando event listeners...');
-
-            // Remover listeners existentes
-            const newSend = chatSend.cloneNode(true);
-            const newInput = chatInput.cloneNode(true);
-            
-            chatSend.parentNode.replaceChild(newSend, chatSend);
-            chatInput.parentNode.replaceChild(newInput, chatInput);
-
-            // Obtener nuevas referencias
-            const functionalSend = document.getElementById('chatSend');
-            const functionalInput = document.getElementById('chatInput');
-
-            // ✅ CONFIGURAR EVENTOS CORRECTAMENTE
-            functionalSend.addEventListener('click', function (e) {
-                console.log('🖱️ Botón enviar clickeado');
-                e.preventDefault();
-                e.stopImmediatePropagation();
-                handleSendMessage(functionalInput, functionalSend);
-            });
-
-            functionalInput.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    console.log('⌨️ Enter presionado');
-                    e.preventDefault();
-                    handleSendMessage(functionalInput, functionalSend);
-                }
-            });
-
-            // Ajustar altura del textarea
-            functionalInput.addEventListener('input', function () {
-                this.style.height = 'auto';
-                this.style.height = (this.scrollHeight) + 'px';
-            });
-
-            console.log('✅ Event listeners configurados correctamente');
-            return { functionalSend, functionalInput };
-        }
-
-        // ✅ FUNCIÓN PARA ABRIR/CERRAR CHAT
-        function toggleChat() {
-            isChatOpen = !isChatOpen;
-            if (isChatOpen) {
-                chatContainer.classList.add('active');
-                chatInput.focus();
-                console.log('📱 Chat abierto');
-            } else {
-                chatContainer.classList.remove('active');
-                console.log('📱 Chat cerrado');
-            }
-        }
-
-        function closeChat() {
-            isChatOpen = false;
-            chatContainer.classList.remove('active');
-            console.log('📱 Chat cerrado manualmente');
-        }
-
-        // ✅ MANEJADORES DE APERTURA/CIERRE
-        chatToggle.addEventListener('click', function (e) {
-            console.log('🔘 Click en toggle del chat');
+    // Scroll suave
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            e.stopPropagation();
-            toggleChat();
-        });
-
-        if (chatClose) {
-            chatClose.addEventListener('click', function (e) {
-                console.log('❌ Click en cerrar chat');
-                e.preventDefault();
-                e.stopPropagation();
-                closeChat();
-            });
-        }
-
-        // ✅ Cerrar chat al hacer clic fuera
-        document.addEventListener('click', function (e) {
-            if (isChatOpen &&
-                !chatContainer.contains(e.target) &&
-                e.target !== chatToggle &&
-                !chatToggle.contains(e.target)) {
-                console.log('📪 Clic fuera del chat - cerrando');
-                closeChat();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
+    });
 
-        // ✅ FUNCIÓN PRINCIPAL DE ENVÍO - CORREGIDA
-        async function handleSendMessage(inputElement, sendButton) {
-            if (isProcessingMessage) {
-                console.log('⏳ Mensaje en proceso, ignorando...');
-                return;
-            }
-
-            const message = inputElement.value.trim();
-            if (!message) {
-                console.log('⚠️ Mensaje vacío');
-                return;
-            }
-
-            console.log('📨 Enviando mensaje:', message);
-            isProcessingMessage = true;
-
-            // Limpiar y deshabilitar
-            inputElement.value = '';
-            inputElement.style.height = 'auto';
-            sendButton.disabled = true;
-            inputElement.disabled = true;
-
-            // Mostrar mensaje usuario inmediatamente
-            addMessage('user', message);
-
-            // Mostrar indicador de typing
-            const typingIndicator = showTypingIndicator();
-
-            try {
-                console.log('🔴 DEBUG: URL de envío:', `${CONFIG.API_BASE_URL}${CONFIG.CHAT_ENDPOINT}`);
-                
-                // ✅ PETICIÓN CORREGIDA - USAR CONFIG.API_BASE_URL
-                const response = await fetch(`${CONFIG.API_BASE_URL}${CONFIG.CHAT_ENDPOINT}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        message: message,
-                        timestamp: new Date().toISOString()
-                    })
-                });
-
-                console.log('✅ Respuesta HTTP recibida:', response.status);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-
-                const data = await response.json();
-                console.log('🤖 Respuesta del servidor:', data);
-
-                // Quitar indicador de typing
-                if (typingIndicator && typingIndicator.remove) {
-                    typingIndicator.remove();
-                }
-
-                if (data.success) {
-                    console.log('🤖 Respuesta del bot:', data.bot_response);
-                    addMessage('bot', data.bot_response);
-                } else {
-                    console.error('❌ Error del servidor:', data.message);
-                    addMessage('bot', '❌ Error: ' + (data.message || 'No se pudo procesar el mensaje'));
-                }
-
-            } catch (error) {
-                console.error('❌ Error en la petición:', error);
-                if (typingIndicator && typingIndicator.remove) {
-                    typingIndicator.remove();
-                }
-                addMessage('bot', '❌ Error de conexión. Por favor, intenta más tarde.');
-            } finally {
-                sendButton.disabled = false;
-                inputElement.disabled = false;
-                inputElement.focus();
-                isProcessingMessage = false;
-                console.log('🔄 Chat listo para nuevo mensaje');
-            }
-        }
-
-        function addMessage(sender, text) {
-            if (!chatMessages) return;
-
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}-message`;
-
-            const messageContent = document.createElement('div');
-            messageContent.className = 'message-content';
-
-            const messageText = document.createElement('p');
-            messageText.textContent = text;
-
-            const messageTime = document.createElement('span');
-            messageTime.className = 'message-time';
-            messageTime.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-            messageContent.appendChild(messageText);
-            messageContent.appendChild(messageTime);
-
-            const messageAvatar = document.createElement('div');
-            messageAvatar.className = 'message-avatar';
-            messageAvatar.innerHTML = sender === 'user' ? '<i class="fas fa-user"></i>' : '<i class="fas fa-robot"></i>';
-
-            if (sender === 'user') {
-                messageDiv.appendChild(messageContent);
-                messageDiv.appendChild(messageAvatar);
+    // Navbar scroll
+    window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.navbar');
+        if (navbar) {
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
             } else {
-                messageDiv.appendChild(messageAvatar);
-                messageDiv.appendChild(messageContent);
+                navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
             }
-
-            chatMessages.appendChild(messageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            console.log(`💬 Mensaje añadido: ${sender} - "${text.substring(0, 30)}..."`);
         }
+    });
 
-        function showTypingIndicator() {
-            if (!chatMessages) return null;
+    // Animaciones de habilidades
+    const skillLevels = document.querySelectorAll('.skill-level');
+    skillLevels.forEach(skill => {
+        const width = skill.style.width;
+        skill.style.width = '0';
+        setTimeout(() => {
+            skill.style.width = width;
+        }, 500);
+    });
 
-            const typingDiv = document.createElement('div');
-            typingDiv.className = 'message bot-message typing-indicator';
+    // FORMULARIO DE CONTACTO
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
 
-            const avatar = document.createElement('div');
-            avatar.className = 'message-avatar';
-            avatar.innerHTML = '<i class="fas fa-robot"></i>';
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
 
-            const messageContent = document.createElement('div');
-            messageContent.className = 'message-content';
+            console.log('📨 Enviando datos de contacto:', formData);
+            console.log('🔗 URL de envío:', `${CONFIG.API_BASE_URL}${CONFIG.CONTACT_ENDPOINT}`);
 
-            const typingText = document.createElement('p');
-            typingText.innerHTML = 'Joel está escribiendo<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span>';
+            if (validateForm(formData)) {
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Enviando...';
+                submitBtn.disabled = true;
 
-            messageContent.appendChild(typingText);
-            typingDiv.appendChild(avatar);
-            typingDiv.appendChild(messageContent);
+                try {
+                    const response = await fetch(`${CONFIG.API_BASE_URL}${CONFIG.CONTACT_ENDPOINT}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        mode: 'cors',
+                        body: JSON.stringify(formData)
+                    });
 
-            chatMessages.appendChild(typingDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+                    console.log('📨 Respuesta del servidor (status):', response.status);
+                    
+                    const data = await response.json();
+                    console.log('📨 Respuesta del servidor (data):', data);
 
-            console.log('⌨️ Mostrando indicador de typing...');
-            return typingDiv;
-        }
-
-        // ✅ INICIALIZAR EVENT LISTENERS
-        const { functionalSend, functionalInput } = setupEventListeners();
-
-        console.log('✅ Chat funcional completamente inicializado');
-        console.log('🎯 Características:');
-        console.log('   - ✅ Apertura/cierre del chat');
-        console.log('   - ✅ Envío con botón');
-        console.log('   - ✅ Envío con Enter');
-        console.log('   - ✅ Sin recargas de página');
-        console.log('   - ✅ Indicador de typing');
-        console.log('   - ✅ URL de producción:', CONFIG.API_BASE_URL);
+                    if (data.success) {
+                        showNotification(data.message, 'success');
+                        contactForm.reset();
+                    } else {
+                        showNotification(data.message || '❌ Error al enviar el mensaje', 'error');
+                    }
+                } catch (error) {
+                    console.error('❌ Error de conexión:', error);
+                    showNotification('❌ Error de conexión. Por favor, intenta más tarde.', 'error');
+                } finally {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            }
+        });
     }
-})();
+
+    // Cargar estrategias al iniciar
+    loadAndDisplayStrategies();
+
+    // Inicializar estilos
+    addAnimationStyles();
+});
+
+// ===== COMUNICACIÓN CON EL SERVIDOR =====
+
+// 1. Probar conexión con el servidor - ULTRA-CORREGIDO
+async function testServerConnection() {
+    try {
+        console.log('🔗 Probando conexión con el servidor...');
+        console.log('🔗 URL de prueba:', `${CONFIG.API_BASE_URL}${CONFIG.TEST_ENDPOINT}`);
+        
+        const response = await fetch(`${CONFIG.API_BASE_URL}${CONFIG.TEST_ENDPOINT}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            mode: 'cors'  // ← ¡ESTO ES CLAVE!
+        });
+        
+        console.log('📡 Estado de la respuesta:', response.status);
+        const data = await response.json();
+
+        if (data.success) {
+            console.log('✅ Servidor conectado:', data.message);
+            showNotification('✅ Conexión con servidor establecida', 'success');
+        } else {
+            console.error('❌ Servidor respondió con error:', data);
+            showNotification('❌ Error en la respuesta del servidor', 'error');
+        }
+    } catch (error) {
+        console.error('❌ Error conectando al servidor:', error);
+        showNotification('❌ No se pudo conectar al servidor. Verifica tu conexión.', 'error');
+    }
+}
+
+// 2. Cargar estrategias desde el servidor
+async function loadAndDisplayStrategies() {
+    try {
+        console.log('🔗 Cargando estrategias desde:', `${CONFIG.API_BASE_URL}${CONFIG.STRATEGIES_ENDPOINT}`);
+        
+        const response = await fetch(`${CONFIG.API_BASE_URL}${CONFIG.STRATEGIES_ENDPOINT}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            mode: 'cors'
+        });
+        
+        const data = await response.json();
+
+        if (data.success) {
+            console.log('📊 Estrategias cargadas:', data.strategies);
+            displayStrategies(data.strategies);
+        }
+    } catch (error) {
+        console.error('❌ Error cargando estrategias:', error);
+        // Fallback a datos locales
+        const localStrategies = loadStrategyData();
+        displayStrategies(localStrategies);
+    }
+}
+
+// 3. Mostrar estrategias en la página
+function displayStrategies(strategies) {
+    const strategiesContainer = document.getElementById('strategies-container');
+    if (!strategiesContainer) return;
+
+    strategiesContainer.innerHTML = strategies.map(strategy => `
+        <div class="strategy-card">
+            <h3>${strategy.name}</h3>
+            <div class="strategy-stats">
+                <div class="stat">
+                    <span class="stat-label">Profit:</span>
+                    <span class="stat-value profit">${strategy.profit}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Win Rate:</span>
+                    <span class="stat-value">${strategy.winRate}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Profit Factor:</span>
+                    <span class="stat-value">${strategy.profitFactor}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">R/R Ratio:</span>
+                    <span class="stat-value">${strategy.rrRatio}</span>
+                </div>
+            </div>
+            <p class="strategy-description">${strategy.description}</p>
+        </div>
+    `).join('');
+}
+
+// ===== FUNCIONES AUXILIARES =====
+
+function validateForm(formData) {
+    const { name, email, subject, message } = formData;
+
+    if (!name.trim()) {
+        showNotification('❌ Por favor ingresa tu nombre', 'error');
+        return false;
+    }
+
+    if (!email.trim()) {
+        showNotification('❌ Por favor ingresa tu email', 'error');
+        return false;
+    }
+
+    if (!isValidEmail(email)) {
+        showNotification('❌ Por favor ingresa un email válido', 'error');
+        return false;
+    }
+
+    if (!subject.trim()) {
+        showNotification('❌ Por favor ingresa un asunto', 'error');
+        return false;
+    }
+
+    if (!message.trim()) {
+        showNotification('❌ Por favor ingresa tu mensaje', 'error');
+        return false;
+    }
+
+    return true;
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function showNotification(message, type) {
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(notification => notification.remove());
+
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <span>${message}</span>
+        <button class="notification-close">&times;</button>
+    `;
+
+    notification.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 5px;
+        color: white;
+        font-weight: 500;
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-width: 300px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        animation: slideInRight 0.3s ease;
+    `;
+
+    if (type === 'success') {
+        notification.style.backgroundColor = '#10b981';
+    } else if (type === 'error') {
+        notification.style.backgroundColor = '#ef4444';
+    }
+
+    const closeBtn = notification.querySelector('.notification-close');
+    closeBtn.style.cssText = `
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        margin-left: 15px;
+    `;
+
+    closeBtn.addEventListener('click', () => {
+        notification.remove();
+    });
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.remove();
+        }
+    }, 5000);
+}
+
+function loadStrategyData() {
+    return [
+        {
+            id: 1,
+            name: 'XAUUSD Scalping',
+            profit: '+15% anual',
+            winRate: '72%',
+            profitFactor: '1.8',
+            rrRatio: '2.1',
+            description: 'Estrategia de scalping en oro basada en patrones de velas en temporalidad de 5 minutos.'
+        },
+        {
+            id: 2,
+            name: 'WTI Breakout',
+            profit: '+22% anual',
+            winRate: '65%',
+            profitFactor: '2.1',
+            rrRatio: '2.8',
+            description: 'Estrategia de ruptura en petróleo con confirmación de volumen y análisis de sesiones.'
+        }
+    ];
+}
+
+function addAnimationStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .notification { animation: slideInRight 0.3s ease; }
+        
+        .strategy-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .strategy-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+        
+        .stat-label {
+            display: block;
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+        
+        .stat-value {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #1e293b;
+        }
+        
+        .stat-value.profit {
+            color: #10b981;
+        }
+    `;
+    document.head.appendChild(style);
+}
