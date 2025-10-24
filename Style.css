@@ -48,6 +48,210 @@ body {
     padding: 0 20px;
 }
 
+
+
+
+
+
+
+
+
+/* ===== MEJORAS PARA LA VISIBILIDAD DEL TEXTO EN EL CHAT ===== */
+
+/* Header del chat - Texto más visible */
+.chat-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #ffffff; /* Blanco puro para máximo contraste */
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Sutil sombra para mejor legibilidad */
+}
+
+.chat-info h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700; /* Más grueso */
+    color: #ffffff; /* Blanco puro */
+    letter-spacing: 0.3px; /* Mejor espaciado */
+}
+
+.chat-status {
+    font-size: 0.8rem;
+    opacity: 0.95; /* Menos transparente */
+    display: flex;
+    align-items: center;
+    color: #e2e8f0; /* Color ligeramente diferente pero visible */
+    font-weight: 500;
+}
+
+/* Mensajes del bot - Mejor contraste */
+.bot-message .message-content {
+    border-bottom-left-radius: 5px;
+    background: #ffffff;
+    color: #1e293b; /* Color oscuro para mejor contraste */
+    border: 1px solid #e2e8f0; /* Borde sutil */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.bot-message .message-content p {
+    color: #1e293b; /* Texto oscuro */
+    font-weight: 500; /* Más grueso */
+}
+
+.bot-message .message-time {
+    color: #64748b; /* Color gris pero visible */
+    font-weight: 400;
+}
+
+/* Mensajes del usuario - Mantener buen contraste */
+.user-message .message-content {
+    background: var(--primary-color);
+    color: #ffffff; /* Blanco puro */
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+.user-message .message-content p {
+    color: #ffffff; /* Blanco puro */
+    font-weight: 500; /* Más grueso */
+}
+
+.user-message .message-time {
+    color: rgba(255, 255, 255, 0.85); /* Blanco ligeramente atenuado pero visible */
+    font-weight: 400;
+}
+
+/* Mensaje de bienvenida - Mejor contraste */
+.welcome-message .message-content {
+    background: linear-gradient(135deg, #4f46e5 0%, #7e22ce 100%); /* Colores más saturados */
+    color: #ffffff; /* Blanco puro */
+    border-radius: 18px;
+    border-bottom-left-radius: 5px;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.welcome-message .message-content p {
+    color: #ffffff; /* Blanco puro */
+    font-weight: 500; /* Más grueso */
+}
+
+.welcome-message .message-time {
+    color: rgba(255, 255, 255, 0.9); /* Muy visible */
+}
+
+/* Área de entrada de texto - Mejor visibilidad */
+.chat-input {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+    background: #ffffff; /* Fondo blanco en lugar de gris claro */
+    border-radius: 24px;
+    padding: 12px 18px;
+    transition: all 0.2s ease;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.chat-input textarea {
+    flex: 1;
+    border: none;
+    background: none;
+    resize: none;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    max-height: 100px;
+    color: #1e293b; /* Texto oscuro para mejor contraste */
+    font-weight: 500; /* Más grueso */
+}
+
+.chat-input textarea::placeholder {
+    color: #64748b; /* Placeholder visible pero discreto */
+    font-weight: 400;
+}
+
+/* Texto del disclaimer - Mejor visibilidad */
+.chat-disclaimer small {
+    color: #64748b; /* Color gris más oscuro */
+    font-size: 0.7rem;
+    font-weight: 500; /* Más grueso */
+}
+
+/* Indicador de typing - Mejor visibilidad */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #ffffff;
+    border-radius: 18px;
+    border-bottom-left-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    align-self: flex-start;
+    max-width: 120px;
+    color: #475569; /* Texto más oscuro */
+    font-weight: 500;
+}
+
+.typing-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #475569; /* Puntos más oscuros */
+    animation: typingBounce 1.4s infinite ease-in-out;
+}
+
+/* Botón de enviar - Mejor visibilidad del icono */
+.send-button {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    background: var(--primary-color);
+    color: #ffffff; /* Icono blanco */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+}
+
+.send-button:hover:not(:disabled) {
+    background: var(--primary-dark);
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(37, 99, 235, 0.4);
+}
+
+/* Mejora adicional: Ajustar el contraste general del área de mensajes */
+.chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: #f8fafc; /* Mantenemos el fondo claro pero aseguramos contraste */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ===== TIPOGRAFÍA MEJORADA ===== */
 h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
@@ -1967,4 +2171,5 @@ p {
     }
 
 }
+
 
