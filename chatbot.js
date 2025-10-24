@@ -1,4 +1,4 @@
-// chat-funcional.js - CHAT COMPLETAMENTE FUNCIONAL SIN RECARGAS
+// chatbot.js - VERSIÓN COMPLETAMENTE CORREGIDA
 (function () {
     'use strict';
 
@@ -8,6 +8,14 @@
     let isChatOpen = false;
     let isProcessingMessage = false;
 
+    // ✅ CONFIGURACIÓN CORREGIDA - USAR SIEMPRE PRODUCCIÓN
+    const CONFIG = {
+        API_BASE_URL: 'https://joelpasapera.pythonanywhere.com',  // ✅ SIEMPRE producción
+        CHAT_ENDPOINT: '/api/chat'
+    };
+
+    console.log('🌐 URL Base del Chat:', CONFIG.API_BASE_URL);
+
     // Esperar a que la página esté completamente cargada
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initializeFunctionalChat, false);
@@ -16,15 +24,6 @@
     }
 
     function initializeFunctionalChat() {
-        const CONFIG = {
-            API_BASE_URL: window.location.origin.includes('pythonanywhere')
-                ? 'https://joelpasapera.pythonanywhere.com'
-                : 'http://localhost:5000',
-            CHAT_ENDPOINT: '/api/chat'
-        };
-
-
-
         // Obtener elementos
         const chatToggle = document.getElementById('chatToggle');
         const chatContainer = document.getElementById('chatContainer');
@@ -40,48 +39,45 @@
 
         console.log('✅ Todos los elementos del chat encontrados');
 
-        // Monitorear recargas
-        window.addEventListener('beforeunload', function (e) {
-            console.log('⚠️ ¡Se está intentando recargar la página!');
-            // Evitar de manera forzosa y agresiva la regarga de la página
-            e.preventDefault();
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-            return;
-        });
+        // ✅ CONFIGURAR EVENT LISTENERS PRIMERO
+        function setupEventListeners() {
+            console.log('🔧 Configurando event listeners...');
 
-        // ✅ SOLUCIÓN DEFINITIVA: Reemplazar completamente el event listener
-        function setupChatEvents() {
-            console.log('🔧 Configurando eventos del chat...');
+            // Remover listeners existentes
+            const newSend = chatSend.cloneNode(true);
+            const newInput = chatInput.cloneNode(true);
+            
+            chatSend.parentNode.replaceChild(newSend, chatSend);
+            chatInput.parentNode.replaceChild(newInput, chatInput);
 
-            // ✅ NUEVO EVENT LISTENER - MÁS SEGURO
-            newChatSend.addEventListener('click', function (e) {
+            // Obtener nuevas referencias
+            const functionalSend = document.getElementById('chatSend');
+            const functionalInput = document.getElementById('chatInput');
+
+            // ✅ CONFIGURAR EVENTOS CORRECTAMENTE
+            functionalSend.addEventListener('click', function (e) {
                 console.log('🖱️ Botón enviar clickeado');
                 e.preventDefault();
                 e.stopImmediatePropagation();
-                e.stopPropagation();
-
-                // Forzar la prevención
-                if (e.cancelable) e.preventDefault();
-
-                handleSendMessage();
-                return false;
+                handleSendMessage(functionalInput, functionalSend);
             });
 
-            // ✅ EVENT LISTENER PARA ENTER
-            newChatInput.addEventListener('keydown', function (e) {
+            functionalInput.addEventListener('keydown', function (e) {
                 if (e.key === 'Enter' && !e.shiftKey) {
                     console.log('⌨️ Enter presionado');
                     e.preventDefault();
-                    e.stopImmediatePropagation();
-                    e.stopPropagation();
-
-                    handleSendMessage();
-                    return false;
+                    handleSendMessage(functionalInput, functionalSend);
                 }
             });
 
-            console.log('✅ Eventos del chat configurados');
+            // Ajustar altura del textarea
+            functionalInput.addEventListener('input', function () {
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+            });
+
+            console.log('✅ Event listeners configurados correctamente');
+            return { functionalSend, functionalInput };
         }
 
         // ✅ FUNCIÓN PARA ABRIR/CERRAR CHAT
@@ -131,79 +127,14 @@
             }
         });
 
-        // ✅ MANEJADOR DE ENVÍO CON PROTECCIÓN EXTREMA
-        function handleSendClick(e) {
-            console.log('🖱️ Click en enviar');
-            if (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                e.stopImmediatePropagation();
-            }
-            // funcion para enviar mensaje al hacer click en el boton
-            handleSendMessage();
-            return;
-        }
-
-        function handleEnterKey(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                console.log('⌨️ Enter presionado');
-                e.preventDefault();
-                e.stopPropagation();
-                e.stopImmediatePropagation();
-                // funcion para enviar mensaje al hacer click en el boton
-                handleSendMessage();
-                return;
-            }
-        }
-
-        // ✅ REMOVER CUALQUIER EVENT LISTENER EXISTENTE Y AGREGAR NUEVOS
-        function setupEventListeners() {
-            // Remover listeners existentes
-            chatSend.replaceWith(chatSend.cloneNode(true));
-            chatInput.replaceWith(chatInput.cloneNode(true));
-
-            // Obtener nuevas referencias
-            const newSend = document.getElementById('chatSend');
-            const newInput = document.getElementById('chatInput');
-
-            // Agregar nuevos listeners
-            newSend.addEventListener('click', handleSendClick, true);
-            newInput.addEventListener('keydown', handleEnterKey, true);
-
-
-            console.log('✅ Event listeners configurados correctamente');
-            return { newSend, newInput };
-        }
-
-        // Configurar event listeners
-        const { newSend: functionalSend, newInput: functionalInput } = setupEventListeners();
-
-        // ✅ AJUSTAR ALTURA DEL TEXTAREA
-        functionalInput.addEventListener('input', function () {
-            this.style.height = 'auto';
-            this.style.height = (this.scrollHeight) + 'px';
-        });
-
-        // ✅ PROTECCIÓN GLOBAL CONTRA FORMULARIOS
-        document.addEventListener('button', function (e) {
-            const target = e.target;
-            if (target && (target.contains(functionalInput) || target.contains(functionalSend) ||
-                target.closest('.chat-container'))) {
-                console.log('🚫 Previniendo envío de formulario del chat');
-                e.preventDefault();
-                e.stopImmediatePropagation();
-                return false;
-            }
-        }, true);
-
-        // ✅ FUNCIÓN PRINCIPAL DE ENVÍO
-        async function handleSendMessage() {
+        // ✅ FUNCIÓN PRINCIPAL DE ENVÍO - CORREGIDA
+        async function handleSendMessage(inputElement, sendButton) {
             if (isProcessingMessage) {
                 console.log('⏳ Mensaje en proceso, ignorando...');
                 return;
             }
 
-            const message = functionalInput.value.trim();
+            const message = inputElement.value.trim();
             if (!message) {
                 console.log('⚠️ Mensaje vacío');
                 return;
@@ -213,10 +144,10 @@
             isProcessingMessage = true;
 
             // Limpiar y deshabilitar
-            functionalInput.value = '';
-            functionalInput.style.height = 'auto';
-            functionalSend.disabled = true;
-            functionalInput.disabled = true;
+            inputElement.value = '';
+            inputElement.style.height = 'auto';
+            sendButton.disabled = true;
+            inputElement.disabled = true;
 
             // Mostrar mensaje usuario inmediatamente
             addMessage('user', message);
@@ -225,48 +156,28 @@
             const typingIndicator = showTypingIndicator();
 
             try {
-                console.log('🔴 DEBUG: antes del fetch - ¿llegamos aquí?');
-                // Realizar una petición HTTP al servidor usando la API Fetch
-                const response = await fetch(
-                    // 🔗 URL de destino: combinamos la URL base y el endpoint del chat
-                    `${CONFIG.API_BASE_URL}${CONFIG.CHAT_ENDPOINT}`,
+                console.log('🔴 DEBUG: URL de envío:', `${CONFIG.API_BASE_URL}${CONFIG.CHAT_ENDPOINT}`);
+                
+                // ✅ PETICIÓN CORREGIDA - USAR CONFIG.API_BASE_URL
+                const response = await fetch(`${CONFIG.API_BASE_URL}${CONFIG.CHAT_ENDPOINT}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        timestamp: new Date().toISOString()
+                    })
+                });
 
-                    {
-                        // 🚀 MÉTODO HTTP: POST para enviar datos al servidor
-                        method: 'POST',
-
-                        // 📋 CABECERAS HTTP: Información adicional sobre la petición
-                        headers: {
-                            // 🎯 Tipo de contenido - indica que enviamos datos en formato JSON
-                            'Content-Type': 'application/json',
-
-                            // ⚠️ NOTA: Evitamos 'X-Requested-With' porque causa problemas de CORS
-                            // ❌ NO incluir: 'X-Requested-With': 'XMLHttpRequest'
-                        },
-
-                        // 📦 CUERPO DE LA PETICIÓN: Los datos que enviamos al servidor
-                        body: JSON.stringify({
-                            // 💬 Mensaje del usuario que queremos procesar
-                            message: message,
-
-                            // ⏰ Marca de tiempo para tracking y logging
-                            timestamp: new Date().toISOString()
-
-                            // 🏷️ Podrías añadir más campos aquí si el servidor los requiere:
-                            // - user_id: '12345'
-                            // - session_id: 'abc123'
-                            // - language: 'es'
-                        })
-                    }
-                );
-
-                console.log('🔴 DEBUG: despues del fetch - ✅ Respuesta HTTP:', response.status);
-
+                console.log('✅ Respuesta HTTP recibida:', response.status);
+                
                 if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
 
                 const data = await response.json();
+                console.log('🤖 Respuesta del servidor:', data);
 
                 // Quitar indicador de typing
                 if (typingIndicator && typingIndicator.remove) {
@@ -282,15 +193,15 @@
                 }
 
             } catch (error) {
-                console.error('❌ Error:', error);
+                console.error('❌ Error en la petición:', error);
                 if (typingIndicator && typingIndicator.remove) {
                     typingIndicator.remove();
                 }
                 addMessage('bot', '❌ Error de conexión. Por favor, intenta más tarde.');
             } finally {
-                functionalSend.disabled = false;
-                functionalInput.disabled = false;
-                functionalInput.focus();
+                sendButton.disabled = false;
+                inputElement.disabled = false;
+                inputElement.focus();
                 isProcessingMessage = false;
                 console.log('🔄 Chat listo para nuevo mensaje');
             }
@@ -360,9 +271,8 @@
             return typingDiv;
         }
 
-        setupChatEvents();
-
-
+        // ✅ INICIALIZAR EVENT LISTENERS
+        const { functionalSend, functionalInput } = setupEventListeners();
 
         console.log('✅ Chat funcional completamente inicializado');
         console.log('🎯 Características:');
@@ -371,5 +281,6 @@
         console.log('   - ✅ Envío con Enter');
         console.log('   - ✅ Sin recargas de página');
         console.log('   - ✅ Indicador de typing');
+        console.log('   - ✅ URL de producción:', CONFIG.API_BASE_URL);
     }
 })();
