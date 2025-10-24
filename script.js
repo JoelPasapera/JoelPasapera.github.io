@@ -1,19 +1,19 @@
-// script.js - CORREGIDO para comunicación real
+// script.js - VERSIÓN DEFINITIVA (SIEMPRE PRODUCCIÓN)
 const CONFIG = {
-    API_BASE_URL: window.location.origin.includes('pythonanywhere')
-        ? 'https://joelpasapera.pythonanywhere.com'  // ✅ Para producción
-        : 'http://localhost:5000',                   // ✅ Para desarrollo
+    API_BASE_URL: 'https://joelpasapera.pythonanywhere.com',  // ✅ SIEMPRE producción
     CONTACT_ENDPOINT: '/contact',
     TEST_ENDPOINT: '/api/test',
-    STRATEGIES_ENDPOINT: '/api/strategies'
+    STRATEGIES_ENDPOINT: '/api/strategies',
+    CHAT_ENDPOINT: '/api/chat'
 };
 
-const API_URL = 'https://joelpasapera.pythonanywhere.com';
+console.log('🚀 Script.js CARgado - Versión PRODUCCIÓN');
+console.log('🌐 URL Base:', CONFIG.API_BASE_URL);
 
 // ===== FUNCIONALIDADES GENERALES =====
 document.addEventListener('DOMContentLoaded', function () {
     console.log('🚀 Inicializando página...');
-    console.log('🌐 URL Base:', API_URL); // CONFIG.API_BASE_URL
+    console.log('🌐 URL Base configurada:', CONFIG.API_BASE_URL);
 
     // Probar conexión con el servidor al cargar
     testServerConnection();
@@ -68,13 +68,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 500);
     });
 
-    // ✅ CORREGIDO: Formulario de contacto con evento 'submit' (no 'button')
+    // FORMULARIO DE CONTACTO
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
 
-            // Obtener datos del formulario
             const formData = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
@@ -83,8 +82,8 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
             console.log('📨 Enviando datos de contacto:', formData);
+            console.log('🔗 URL de envío:', `${CONFIG.API_BASE_URL}${CONFIG.CONTACT_ENDPOINT}`);
 
-            // Validar formulario
             if (validateForm(formData)) {
                 const submitBtn = this.querySelector('button[type="submit"]');
                 const originalText = submitBtn.textContent;
@@ -92,20 +91,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 submitBtn.disabled = true;
 
                 try {
-                    // ✅ ENVÍO REAL AL SERVIDOR
                     const response = await fetch(`${CONFIG.API_BASE_URL}${CONFIG.CONTACT_ENDPOINT}`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
+                        mode: 'cors',
                         body: JSON.stringify(formData)
                     });
 
+                    console.log('📨 Respuesta del servidor (status):', response.status);
+                    
                     const data = await response.json();
+                    console.log('📨 Respuesta del servidor (data):', data);
 
                     if (data.success) {
                         showNotification(data.message, 'success');
-                        console.log('✅ Respuesta del servidor:', data);
                         contactForm.reset();
                     } else {
                         showNotification(data.message || '❌ Error al enviar el mensaje', 'error');
@@ -121,49 +122,105 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Cargar estrategias al iniciar
+    loadAndDisplayStrategies();
+
     // Inicializar estilos
     addAnimationStyles();
 });
 
 // ===== COMUNICACIÓN CON EL SERVIDOR =====
 
-// 1. Probar conexión con el servidor
+// 1. Probar conexión con el servidor - CORREGIDO
 async function testServerConnection() {
     try {
         console.log('🔗 Probando conexión con el servidor...');
-        const response = await fetch(`${CONFIG.API_BASE_URL}${CONFIG.TEST_ENDPOINT}`);
+        console.log('🔗 URL de prueba:', `${CONFIG.API_BASE_URL}${CONFIG.TEST_ENDPOINT}`);
+        
+        const response = await fetch(`${CONFIG.API_BASE_URL}${CONFIG.TEST_ENDPOINT}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            mode: 'cors'
+        });
+        
+        console.log('📡 Estado de la respuesta:', response.status);
         const data = await response.json();
 
         if (data.success) {
             console.log('✅ Servidor conectado:', data.message);
             showNotification('✅ Conexión con servidor establecida', 'success');
+        } else {
+            console.error('❌ Servidor respondió con error:', data);
+            showNotification('❌ Error en la respuesta del servidor', 'error');
         }
     } catch (error) {
         console.error('❌ Error conectando al servidor:', error);
-        // showNotification('⚠️ Modo offline - Algunas funciones no están disponibles', 'error');  
+        showNotification('❌ No se pudo conectar al servidor. Verifica tu conexión.', 'error');
     }
 }
 
 // 2. Cargar estrategias desde el servidor
-async function loadStrategiesFromServer() {
+async function loadAndDisplayStrategies() {
     try {
-        const response = await fetch(`${CONFIG.API_BASE_URL}${CONFIG.STRATEGIES_ENDPOINT}`);
+        console.log('🔗 Cargando estrategias desde:', `${CONFIG.API_BASE_URL}${CONFIG.STRATEGIES_ENDPOINT}`);
+        
+        const response = await fetch(`${CONFIG.API_BASE_URL}${CONFIG.STRATEGIES_ENDPOINT}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            mode: 'cors'
+        });
+        
         const data = await response.json();
 
         if (data.success) {
             console.log('📊 Estrategias cargadas:', data.strategies);
-            return data.strategies;
+            displayStrategies(data.strategies);
         }
     } catch (error) {
         console.error('❌ Error cargando estrategias:', error);
-        // Retornar datos locales como fallback
-        return loadStrategyData();
+        // Fallback a datos locales
+        const localStrategies = loadStrategyData();
+        displayStrategies(localStrategies);
     }
+}
+
+// 3. Mostrar estrategias en la página
+function displayStrategies(strategies) {
+    const strategiesContainer = document.getElementById('strategies-container');
+    if (!strategiesContainer) return;
+
+    strategiesContainer.innerHTML = strategies.map(strategy => `
+        <div class="strategy-card">
+            <h3>${strategy.name}</h3>
+            <div class="strategy-stats">
+                <div class="stat">
+                    <span class="stat-label">Profit:</span>
+                    <span class="stat-value profit">${strategy.profit}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Win Rate:</span>
+                    <span class="stat-value">${strategy.winRate}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Profit Factor:</span>
+                    <span class="stat-value">${strategy.profitFactor}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">R/R Ratio:</span>
+                    <span class="stat-value">${strategy.rrRatio}</span>
+                </div>
+            </div>
+            <p class="strategy-description">${strategy.description}</p>
+        </div>
+    `).join('');
 }
 
 // ===== FUNCIONES AUXILIARES =====
 
-// Validación del formulario
 function validateForm(formData) {
     const { name, email, subject, message } = formData;
 
@@ -195,14 +252,15 @@ function validateForm(formData) {
     return true;
 }
 
-// Validar email
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
-// Sistema de notificaciones
 function showNotification(message, type) {
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(notification => notification.remove());
+
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
     notification.innerHTML = `
@@ -249,7 +307,6 @@ function showNotification(message, type) {
 
     document.body.appendChild(notification);
 
-    // Auto-eliminar después de 5 segundos
     setTimeout(() => {
         if (notification.parentNode) {
             notification.remove();
@@ -257,7 +314,6 @@ function showNotification(message, type) {
     }, 5000);
 }
 
-// Función existente para datos locales (fallback)
 function loadStrategyData() {
     return [
         {
@@ -268,11 +324,19 @@ function loadStrategyData() {
             profitFactor: '1.8',
             rrRatio: '2.1',
             description: 'Estrategia de scalping en oro basada en patrones de velas en temporalidad de 5 minutos.'
+        },
+        {
+            id: 2,
+            name: 'WTI Breakout',
+            profit: '+22% anual',
+            winRate: '65%',
+            profitFactor: '2.1',
+            rrRatio: '2.8',
+            description: 'Estrategia de ruptura en petróleo con confirmación de volumen y análisis de sesiones.'
         }
     ];
 }
 
-// Añadir estilos de animación
 function addAnimationStyles() {
     const style = document.createElement('style');
     style.textContent = `
@@ -281,9 +345,47 @@ function addAnimationStyles() {
             to { transform: translateX(0); opacity: 1; }
         }
         .notification { animation: slideInRight 0.3s ease; }
+        
+        .strategy-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .strategy-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+        
+        .stat-label {
+            display: block;
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+        
+        .stat-value {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #1e293b;
+        }
+        
+        .stat-value.profit {
+            color: #10b981;
+        }
     `;
     document.head.appendChild(style);
-
 }
-
-
