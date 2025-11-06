@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Academia de Trading - Aprende trading algorítmico desde cero hasta nivel avanzado. Guía completa por Joel Pasapera.">
+    <meta name="keywords" content="academia trading, curso trading, análisis técnico, trading algorítmico, estrategias trading">
+    <meta name="author" content="Joel Pasapera">
+    <link rel="icon" href="icons/favicon.ico">
+    <title>Academia de Trading | Joel Pasapera - Guía Completa</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="Style.css">
+    
+    <style>
+        /* Estilos específicos para la Academia */
+        .academia-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            min-height: 100vh;
+            padding-top: 70px;
+            background: var(--bg-secondary);
+        }
+
+        /* Navegación Lateral */
+        .sidebar-nav {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 300px;
+            height: calc(100vh - 70px);
+            background: white;
+            border-right: 2px solid var(--border-color);
+            overflow-y: auto;
+            padding: 24px;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .sidebar-header p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Búsqueda */
+        .search-box {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 40px 12px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        /* Menú de navegación */
+        .nav-menu-academia {
+            list-style: none;
+        }
+
+        .nav-section {
+            margin-bottom: 8px;
+        }
+
+        .nav-section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .nav-section-title:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .nav-section-title.active {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .nav-section-title i {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-section.open .nav-section-title i {
+            transform: rotate(180deg);
+        }
+
+        .nav-subsections {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding-left: 16px;
+        }
+
+        .nav-section.open .nav-subsections {
+            max-height: 1000px;
+        }
+
+        .nav-subsection-link {
+            display: block;
+            padding: 10px 16px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            border-left: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .nav-subsection-link:hover {
+            color: var(--secondary-color);
+            border-left-color: var(--secondary-color);
+            padding-left: 20px;
+        }
+
+        .nav-subsection-link.active {
+            color: var(--secondary-color);
+            border-left-color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        /* Contenido Principal */
+        .main-content {
+            margin-left: 300px;
+            padding: 40px;
+            max-width: 1000px;
+        }
+
+        .content-header {
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .content-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            color: var(--primary-color);
+        }
+
+        .content-meta {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .meta-item i {
+            color: var(--secondary-color);
+        }
+
+        /* Secciones de contenido */
+        .content-section {
+            margin-bottom: 60px;
+            scroll-margin-top: 100px;
+        }
+
+        .content-section h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 3px solid var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .content-section h2 i {
+            color: var(--secondary-color);
+            font-size: 1.8rem;
+        }
+
+        .content-section h3 {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin: 32px 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-section h3::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        .content-section h4 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin: 24px 0 12px 0;
+        }
+
+        .content-section p {
+            line-height: 1.8;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+
+        .content-section ul,
+        .content-section ol {
+            margin: 16px 0 16px 24px;
+            line-height: 1.8;
+        }
+
+        .content-section li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        /* Cajas destacadas */
+        .info-box {
+            background: rgba(59, 130, 246, 0.05);
+            border-left: 4px solid var(--secondary-color);
+            padding: 20px;
+            border-radius: var(--border-radius-sm);
+            margin: 24px 0;
+        }
+
+        .info-box.warning {
+            background: rgba(245, 158, 11, 0.05);
+            border-left-color: var(--warning-color);
+        }
+
+        .info-box.success {
+            background: rgba(16, 185, 129, 0.05);
+            border-left-color: var(--accent-color);
+        }
+
+        .info-box.danger {
+            background: rgba(239, 68, 68, 0.05);
+            border-left-color: var(--danger-color);
+        }
+
+        .info-box-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .info-box-title i {
+            font-size: 1.3rem;
+        }
+
+        .info-box.warning .info-box-title {
+            color: var(--warning-color);
+        }
+
+        .info-box.success .info-box-title {
+            color: var(--accent-color);
+        }
+
+        .info-box.danger .info-box-title {
+            color: var(--danger-color);
+        }
+
+        /* Code blocks */
+        .code-block {
+            background: var(--primary-color);
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: var(--border-radius-sm);
+            overflow-x: auto;
+            margin: 24px 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Tabla de contenidos flotante */
+        .progress-indicator {
+            position: fixed;
+            top: 70px;
+            right: 0;
+            width: 4px;
+            height: calc(100vh - 70px);
+            background: var(--border-color);
+            z-index: 99;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background: var(--secondary-color);
+            transition: height 0.1s ease;
+        }
+
+        /* Botón volver arriba */
+        .back-to-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: var(--box-shadow-lg);
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow-xl);
+        }
+
+        /* Breadcrumbs */
+        .breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumbs a:hover {
+            color: var(--secondary-color);
+        }
+
+        .breadcrumbs i {
+            color: var(--text-light);
+            font-size: 0.7rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .academia-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-nav {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 1001;
+            }
+
+            .sidebar-nav.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 24px;
+            }
+
+            .mobile-menu-toggle {
+                position: fixed;
+                top: 80px;
+                left: 16px;
+                width: 50px;
+                height: 50px;
+                background: var(--secondary-color);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 1.2rem;
+                cursor: pointer;
+                box-shadow: var(--box-shadow-lg);
+                z-index: 1002;
+            }
+
+            .sidebar-overlay {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease;
+                z-index: 1000;
+            }
+
+            .sidebar-overlay.visible {
+                opacity: 1;
+                pointer-events: all;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-header h1 {
+                font-size: 2rem;
+            }
+
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .content-section h3 {
+                font-size: 1.2rem;
+            }
+
+            .sidebar-nav {
+                width: 280px;
+            }
+
+            .back-to-top {
+                bottom: 80px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-section {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Quote styling */
+        blockquote {
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 20px;
+            margin: 24px 0;
+            font-style: italic;
+            color: var(--text-dark);
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            background: white;
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        table th {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        table tr:hover {
+            background: var(--bg-secondary);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Barra de Navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <i class="fas fa-chart-line"></i>
+                    Joel Pasapera
+                </a>
+                <span>Academia de Trading</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i> Inicio
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#bots" class="nav-link">
+                        <i class="fas fa-robot"></i> Bots
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link">
+                        <i class="fas fa-envelope"></i> Contacto
+                    </a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Toggle -->
+    <div class="mobile-menu-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Layout Principal -->
+    <div class="academia-layout">
+        <!-- Navegación Lateral -->
+        <aside class="sidebar-nav" id="sidebarNav">
+            <div class="sidebar-header">
+                <h2>📚 Academia de Trading</h2>
+                <p>Guía completa por Joel Pasapera</p>
+            </div>
+
+            <!-- Búsqueda -->
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Buscar tema...">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <!-- Menú de Navegación -->
+            <nav>
+                <ul class="nav-menu-academia" id="navMenu">
+                    <li class="nav-section open">
+                        <div class="nav-section-title" onclick="toggleSection(this)">
+                            <span>📖 Introducción</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="nav-subsections">
+                            <a href="#introduccion" class="nav-subsection-link">¿Qué es ser rentable?</a>
+                            <a href="#reflexiones" class="nav-subsection-link">Reflexiones</a>
+                            <a href="#verdades" class="nav-subsection-link">Verdades Fundamentales</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-section">
+                        <div class="nav-section-title" onclick="toggleSection(this)">
+                            <span>🎯 Conceptos Básicos</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="nav-subsections">
+                            <a href="#cfd" class="nav-subsection-link">CFD y Forex</a>
+                            <a href="#ordenes" class="nav-subsection-link">Tipos de Órdenes</a>
+                            <a href="#plataformas" class="nav-subsection-link">Plataformas</a>
+                            <a href="#brokers" class="nav-subsection-link">Brokers y Comisiones</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-section">
+                        <div class="nav-section-title" onclick="toggleSection(this)">
+                            <span>📊 Sistema de Trading</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="nav-subsections">
+                            <a href="#sistema" class="nav-subsection-link">Sistema de Trading</a>
+                            <a href="#reglas-entrada" class="nav-subsection-link">Reglas de Entrada</a>
+                            <a href="#reglas-salida" class="nav-subsection-link">Reglas de Salida</a>
+                            <a href="#gestion-riesgo" class="nav-subsection-link">Gestión de Riesgo</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-section">
+                        <div class="nav-section-title" onclick="toggleSection(this)">
+                            <span>📈 Análisis Técnico</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="nav-subsections">
+                            <a href="#estructura" class="nav-subsection-link">Estructura y Tendencia</a>
+                            <a href="#velas" class="nav-subsection-link">Velas Japonesas</a>
+                            <a href="#bos-choch" class="nav-subsection-link">BOS y ChoCH</a>
+                            <a href="#zonas" class="nav-subsection-link">Zonas de Liquidez</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-section">
+                        <div class="nav-section-title" onclick="toggleSection(this)">
+                            <span>🎨 Estrategias</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="nav-subsections">
+                            <a href="#tipos-estrategias" class="nav-subsection-link">Tipos de Estrategias</a>
+                            <a href="#breakout" class="nav-subsection-link">Estrategias Breakout</a>
+                            <a href="#amd" class="nav-subsection-link">AMD (Acum-Manip-Distrib)</a>
+                            <a href="#burs" class="nav-subsection-link">Sistema BURS</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-section">
+                        <div class="nav-section-title" onclick="toggleSection(this)">
+                            <span>🧠 Psicología</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="nav-subsections">
+                            <a href="#perfil-psicologico" class="nav-subsection-link">Perfil del Trader</a>
+                            <a href="#disciplina" class="nav-subsection-link">Disciplina</a>
+                            <a href="#errores" class="nav-subsection-link">Errores Comunes</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-section">
+                        <div class="nav-section-title" onclick="toggleSection(this)">
+                            <span>💻 Programación MQL5</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="nav-subsections">
+                            <a href="#mql5-intro" class="nav-subsection-link">Introducción a MQL5</a>
+                            <a href="#funciones" class="nav-subsection-link">Funciones y Eventos</a>
+                            <a href="#organizacion" class="nav-subsection-link">Organización de Código</a>
+                            <a href="#errores-mql5" class="nav-subsection-link">Manejo de Errores</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-section">
+                        <div class="nav-section-title" onclick="toggleSection(this)">
+                            <span>₿ Criptomonedas</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="nav-subsections">
+                            <a href="#crypto" class="nav-subsection-link">Trading de Cripto</a>
+                            <a href="#exchanges" class="nav-subsection-link">Exchanges</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Footer Sidebar -->
+            <div style="margin-top: 32px; padding-top: 20px; border-top: 2px solid var(--border-color); text-align: center;">
+                <p style="font-size: 0.8rem; color: var(--text-light); margin: 0;">
+                    © 2025 Joel Pasapera<br>
+                    Todos los derechos reservados
+                </p>
+            </div>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <main class="main-content">
+            <!-- Breadcrumbs -->
+            <div class="breadcrumbs">
+                <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Academia de Trading</span>
+            </div>
+
+            <!-- Header del Contenido -->
+            <header class="content-header">
+                <h1>📚 Academia de Trading Algorítmico</h1>
+                <p class="lead" style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 24px;">
+                    Guía completa desde conceptos básicos hasta programación de bots. 
+                    Todo lo que necesitas para convertirte en un trader algorítmico profesional.
+                </p>
+                <div class="content-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-user"></i>
+                        <span>Por Joel Pasapera</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Actualizado 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-book"></i>
+                        <span>Guía Completa</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Todos los Niveles</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- SECCIÓN: Introducción -->
+            <section class="content-section" id="introduccion">
+                <h2><i class="fas fa-book-open"></i> Introducción al Trading</h2>
+                
+                <h3>¿Qué es ser rentable?</h3>
+                <p>
+                    La rentabilidad en trading no se trata simplemente de ganar dinero, sino de mantener 
+                    una ganancia consistente y sostenible a lo largo del tiempo. Un trader rentable es 
+                    aquel que, después de un período significativo (generalmente un año completo), 
+                    muestra resultados positivos netos.
+                </p>
+
+                <div class="info-box success">
+                    <div class="info-box-title">
+                        <i class="fas fa-lightbulb"></i>
+                        Concepto Clave
+                    </div>
+                    <p>
+                        <strong>La rentabilidad no se mide por operaciones individuales, sino por el 
+                        rendimiento anual consistente.</strong> Un trader puede tener pérdidas en el 80% 
+                        de sus operaciones y aún así ser rentable si gestiona correctamente su riesgo.
+                    </p>
+                </div>
+
+                <h3>¿Qué se necesita para ser un trader rentable y consistente?</h3>
+                <ul>
+                    <li><strong>Sistema de trading probado:</strong> Una metodología clara con reglas objetivas</li>
+                    <li><strong>Gestión de riesgo estricta:</strong> Nunca arriesgar más del 1-2% por operación</li>
+                    <li><strong>Disciplina emocional:</strong> Capacidad de seguir el plan incluso en rachas negativas</li>
+                    <li><strong>Backtesting riguroso:</strong> Validar estrategias con años de datos históricos</li>
+                    <li><strong>Educación continua:</strong> El mercado evoluciona, tú también debes hacerlo</li>
+                    <li><strong>Capital suficiente:</strong> Mínimo recomendado: $1,000 - $5,000 USD</li>
+                </ul>
+
+                <h3>¿Cómo se logra la rentabilidad?</h3>
+                <p>
+                    La rentabilidad se alcanza mediante la combinación de tres pilares fundamentales:
+                </p>
+                
+                <ol>
+                    <li>
+                        <strong>Edge estadístico:</strong> Una ventaja matemática comprobable en el mercado. 
+                        Esto significa que tu estrategia, después de cientos de operaciones, tiene una 
+                        esperanza matemática positiva.
+                    </li>
+                    <li>
+                        <strong>Gestión de riesgo:</strong> Proteger tu capital es más importante que 
+                        maximizar ganancias. Un trader que pierde el 50% de su capital necesita ganar 
+                        el 100% solo para recuperarse.
+                    </li>
+                    <li>
+                        <strong>Consistencia operativa:</strong> Seguir tu sistema sin desviaciones, 
+                        independientemente de las emociones del momento.
+                    </li>
+                </ol>
+
+                <div class="info-box warning">
+                    <div class="info-box-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Advertencia Importante
+                    </div>
+                    <p>
+                        El 90% de los traders pierden dinero en los primeros años. La diferencia entre 
+                        el 10% exitoso y el resto no es talento innato, sino <strong>disciplina, 
+                        paciencia y un sistema probado</strong>.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: Reflexiones -->
+            <section class="content-section" id="reflexiones">
+                <h2><i class="fas fa-brain"></i> Reflexiones sobre el Trading</h2>
+                
+                <h3>El trading se hace sencillo con reglas objetivas y precisas</h3>
+                <p>
+                    La complejidad en el trading surge de la ambigüedad. Cuando tus reglas de entrada 
+                    y salida son claras e inequívocas, la emoción se reduce drásticamente. Un sistema 
+                    objetivo es aquel donde dos traders diferentes, mirando el mismo gráfico, llegan 
+                    a la misma conclusión sobre si operar o no.
+                </p>
+
+                <blockquote>
+                    "Compra barato, vende caro y vigila zonas en momentos de mayor volatilidad"
+                    - Principio fundamental del trading
+                </blockquote>
+
+                <h3>¿Cómo afectan las emociones humanas a la economía y al mercado?</h3>
+                <p>
+                    Los mercados financieros son, en esencia, un reflejo masivo de la psicología humana. 
+                    Cada vela en un gráfico representa millones de decisiones tomadas por traders 
+                    influenciados por miedo, codicia, esperanza y pánico.
+                </p>
+
+                <ul>
+                    <li><strong>Miedo:</strong> Provoca ventas masivas y caídas rápidas</li>
+                    <li><strong>Codicia:</strong> Genera burbujas especulativas</li>
+                    <li><strong>Esperanza:</strong> Mantiene posiciones perdedoras demasiado tiempo</li>
+                    <li><strong>Pánico:</strong> Crea oportunidades para traders disciplinados</li>
+                </ul>
+
+                <div class="info-box">
+                    <div class="info-box-title">
+                        <i class="fas fa-chart-line"></i>
+                        Insight Profesional
+                    </div>
+                    <p>
+                        Los grandes movimientos del mercado ocurren cuando las emociones colectivas 
+                        alcanzan extremos. Tu trabajo como trader algorítmico es <strong>identificar 
+                        estos extremos objetivamente y operar en contra del sentimiento general</strong>.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: Verdades Fundamentales -->
+            <section class="content-section" id="verdades">
+                <h2><i class="fas fa-certificate"></i> Verdades Fundamentales del Trading</h2>
+                
+                <p>
+                    Estas son verdades universales que todo trader debe interiorizar. No son opiniones, 
+                    son hechos comprobados por décadas de datos de mercado:
+                </p>
+
+                <h3>1. El objetivo no es la rentabilidad, es la consistencia</h3>
+                <p>
+                    Ganar $10,000 en un mes y perder $15,000 el siguiente no es trading exitoso. 
+                    La consistencia significa rendimientos predecibles y sostenibles, aunque sean 
+                    modestos. Un 15-20% anual consistente supera al 90% de los inversores profesionales.
+                </p>
+
+                <h3>2. El trading es un negocio de probabilidades</h3>
+                <p>
+                    Cada operación es una apuesta probabilística. No sabes qué operación específica 
+                    ganará o perderá, pero después de 100 operaciones, las probabilidades se manifestarán. 
+                    Por eso necesitas:
+                </p>
+                <ul>
+                    <li>Un edge estadístico positivo (>50% win rate o profit factor >1.5)</li>
+                    <li>Suficientes operaciones para que la estadística funcione</li>
+                    <li>Gestión de riesgo que te permita sobrevivir las rachas perdedoras</li>
+                </ul>
+
+                <h3>3. Perder es inevitable y estadísticamente normal</h3>
+                <div class="info-box danger">
+                    <div class="info-box-title">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Verdad Incómoda
+                    </div>
+                    <p>
+                        Incluso el mejor sistema tendrá rachas de 5-10 pérdidas consecutivas. 
+                        Si no estás preparado psicológicamente para esto, <strong>no estás listo 
+                        para hacer trading con dinero real</strong>.
+                    </p>
+                </div>
+
+                <h3>4. La rentabilidad no depende de una estrategia complicada</h3>
+                <p>
+                    Los traders principiantes buscan el "santo grial" - una estrategia compleja que 
+                    gane el 90% del tiempo. La realidad es que las estrategias más rentables son 
+                    sorprendentemente simples:
+                </p>
+                <ul>
+                    <li>Ruptura de rangos en horarios específicos</li>
+                    <li>Retrocesos a zonas de soporte/resistencia</li>
+                    <li>Seguimiento de tendencia con confirmación</li>
+                </ul>
+
+                <h3>5. La correlación inversa entre ratio y acierto</h3>
+                <p>
+                    Existe una relación matemática fundamental: cuanto mayor sea tu ratio 
+                    riesgo-beneficio (RR), menor será tu porcentaje de acierto. Por ejemplo:
+                </p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ratio RR</th>
+                            <th>Win Rate Típico</th>
+                            <th>Profit Factor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1:1</td>
+                            <td>55-60%</td>
+                            <td>1.2-1.4</td>
+                        </tr>
+                        <tr>
+                            <td>1:2</td>
+                            <td>45-50%</td>
+                            <td>1.8-2.0</td>
+                        </tr>
+                        <tr>
+                            <td>1:3</td>
+                            <td>35-40%</td>
+                            <td>2.1-2.4</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>6. Es importante conocer el número de oro (Drawdown)</h3>
+                <p>
+                    El drawdown es la <strong>métrica más importante</strong> de cualquier sistema. 
+                    Representa la caída máxima desde un pico hasta un valle en tu curva de capital. 
+                    Si tu sistema tiene un drawdown máximo histórico de 20%, debes estar preparado 
+                    psicológica y financieramente para soportar esa caída.
+                </p>
+
+                <div class="info-box success">
+                    <div class="info-box-title">
+                        <i class="fas fa-check-circle"></i>
+                        Regla de Oro
+                    </div>
+                    <p>
+                        <strong>Nunca operes un sistema cuyo drawdown máximo supere el 30% de tu capital.</strong> 
+                        Idealmente, busca sistemas con drawdown <20%.
+                    </p>
+                </div>
+
+                <h3>7. Compra barato y vende caro en momentos de mayor volatilidad</h3>
+                <p>
+                    Esta frase simple resume toda la sabiduría del trading. Los mejores momentos 
+                    para operar son cuando:
+                </p>
+                <ul>
+                    <li>El precio está en zonas extremas (sobrecompra/sobreventa)</li>
+                    <li>La volatilidad es alta (movimientos grandes = mayor potencial de ganancia)</li>
+                    <li>Hay confluencia de múltiples factores técnicos</li>
+                </ul>
+            </section>
+
+            <!-- SECCIÓN: Conceptos Básicos -->
+            <section class="content-section" id="cfd">
+                <h2><i class="fas fa-coins"></i> Conceptos Básicos</h2>
+                
+                <h3>¿Qué es CFD?</h3>
+                <p>
+                    <strong>CFD (Contract for Difference)</strong> es un contrato financiero derivado 
+                    que permite especular sobre el movimiento de precios de un activo sin poseerlo físicamente.
+                </p>
+
+                <div class="info-box">
+                    <div class="info-box-title">
+                        <i class="fas fa-info-circle"></i>
+                        Ventajas de los CFD
+                    </div>
+                    <ul style="margin: 0;">
+                        <li><strong>Apalancamiento:</strong> Operar con más capital del que tienes</li>
+                        <li><strong>Flexibilidad:</strong> Puedes comprar (ir largo) o vender (ir corto)</li>
+                        <li><strong>Acceso global:</strong> Opera forex, índices, materias primas, cripto</li>
+                        <li><strong>Sin propiedad física:</strong> No necesitas almacenar oro o acciones</li>
+                    </ul>
+                </div>
+
+                <div class="info-box warning">
+                    <div class="info-box-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Riesgos de los CFD
+                    </div>
+                    <ul style="margin: 0;">
+                        <li><strong>Alto riesgo:</strong> El apalancamiento magnifica pérdidas</li>
+                        <li><strong>Costos de mantenimiento:</strong> Swaps y comisiones se acumulan</li>
+                        <li><strong>No hay propiedad:</strong> No recibes dividendos reales</li>
+                        <li><strong>Regulación variable:</strong> Depende del broker y jurisdicción</li>
+                    </ul>
+                </div>
+
+                <h3>Pares de Divisas (Forex)</h3>
+                <p>
+                    El mercado Forex es el más grande del mundo, con un volumen diario superior a 
+                    $6 trillones. Los pares se clasifican en:
+                </p>
+
+                <h4>Pares Mayores (Majors)</h4>
+                <ul>
+                    <li><strong>EUR/USD:</strong> El par más líquido del mundo</li>
+                    <li><strong>GBP/USD:</strong> Alta volatilidad, movimientos grandes</li>
+                    <li><strong>USD/JPY:</strong> Sensible a noticias asiáticas</li>
+                    <li><strong>USD/CHF:</strong> Activo refugio en tiempos de crisis</li>
+                </ul>
+
+                <h4>Pares Menores (Minors)</h4>
+                <ul>
+                    <li>EUR/GBP, EUR/JPY, GBP/JPY</li>
+                    <li>Spreads más amplios pero oportunidades únicas</li>
+                </ul>
+
+                <h4>Pares Exóticos</h4>
+                <ul>
+                    <li>USD/MXN, USD/TRY, USD/ZAR</li>
+                    <li>Alta volatilidad pero costos elevados</li>
+                </ul>
+
+                <h3 id="ordenes">Tipos de Órdenes de Mercado</h3>
+                
+                <h4>1. Ejecución Instantánea (Market Order)</h4>
+                <p>
+                    Se ejecuta inmediatamente al precio actual del mercado. Úsala cuando:
+                </p>
+                <ul>
+                    <li>Quieres entrar YA en una operación</li>
+                    <li>El precio está moviéndose rápido</li>
+                    <li>No te importan unos pips de slippage</li>
+                </ul>
+
+                <h4>2. Órdenes Pendientes (Pending Orders)</h4>
+                
+                <div class="code-block">
+// Tipos de órdenes pendientes
+
+Buy Stop  → Compra cuando el precio SUBA hasta X
+Buy Limit → Compra cuando el precio BAJE hasta X
+
+Sell Stop  → Vende cuando el precio BAJE hasta X
+Sell Limit → Vende cuando el precio SUBA hasta X
+                </div>
+
+                <p><strong>Ejemplo práctico:</strong></p>
+                <p>
+                    El precio de XAUUSD está en $2000. Crees que si rompe $2010 continuará subiendo, 
+                    pero no quieres estar pegado al gráfico esperando. Colocas un <strong>Buy Stop 
+                    en $2010</strong> y la orden se ejecutará automáticamente si el precio alcanza 
+                    ese nivel.
+                </p>
+
+                <h3 id="plataformas">Plataformas de Trading</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Plataforma</th>
+                            <th>Ventajas</th>
+                            <th>Ideal Para</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>MetaTrader 5</strong></td>
+                            <td>
+                                - Más completo que MT4<br>
+                                - Múltiples timeframes<br>
+                                - Mejor para algorítmico
+                            </td>
+                            <td>Trading algorítmico y profesional</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MetaTrader 4</strong></td>
+                            <td>
+                                - Más indicadores disponibles<br>
+                                - Comunidad grande<br>
+                                - Estable y probado
+                            </td>
+                            <td>Trading discrecional</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TradingView</strong></td>
+                            <td>
+                                - Gráficos hermosos<br>
+                                - Cloud-based<br>
+                                - Alertas potentes
+                            </td>
+                            <td>Análisis técnico visual</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FX Replay</strong></td>
+                            <td>
+                                - Replay de mercado<br>
+                                - Práctica sin riesgo<br>
+                                - Acelerar el tiempo
+                            </td>
+                            <td>Backtesting manual y práctica</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Mensaje de Contenido Extenso -->
+            <div style="background: linear-gradient(135deg, var(--secondary-color), var(--accent-color)); padding: 60px 40px; border-radius: var(--border-radius); text-align: center; color: white; margin: 60px 0;">
+                <i class="fas fa-book" style="font-size: 4rem; margin-bottom: 24px; opacity: 0.9;"></i>
+                <h2 style="color: white; font-size: 2rem; margin-bottom: 16px;">📚 Contenido Completo Disponible</h2>
+                <p style="font-size: 1.2rem; color: rgba(255,255,255,0.95); margin-bottom: 32px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Este libro contiene más de <strong>380 páginas de contenido profesional</strong> que cubren 
+                    todos los aspectos del trading algorítmico, desde conceptos básicos hasta programación 
+                    avanzada en MQL5.
+                </p>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 32px; border-radius: var(--border-radius-sm); margin: 32px 0;">
+                    <h3 style="color: white; margin-bottom: 20px;">📖 Temas Incluidos en el Libro Completo:</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; text-align: left;">
+                        <div>
+                            <strong style="color: var(--accent-color);">✅ Estructura y Tendencia</strong><br>
+                            - Velas japonesas<br>
+                            - BOS y ChoCH<br>
+                            - Fractales y máximos/mínimos
+                        </div>
+                        <div>
+                            <strong style="color: var(--accent-color);">✅ Zonas de Liquidez</strong><br>
+                            - Order blocks<br>
+                            - Fibonacci<br>
+                            - Gaps e imbalances
+                        </div>
+                        <div>
+                            <strong style="color: var(--accent-color);">✅ Sesiones de Mercado</strong><br>
+                            - Nueva York, Londres, Tokio<br>
+                            - Noticias fundamentales<br>
+                            - AMD (Acum-Manip-Distrib)
+                        </div>
+                        <div>
+                            <strong style="color: var(--accent-color);">✅ Sistema BURS</strong><br>
+                            - 4 sistemas de trazado<br>
+                            - Correlaciones bursátiles<br>
+                            - De teoría a práctica
+                        </div>
+                        <div>
+                            <strong style="color: var(--accent-color);">✅ Psicología del Trader</strong><br>
+                            - Perfil psicológico<br>
+                            - Disciplina y resiliencia<br>
+                            - Termostato financiero
+                        </div>
+                        <div>
+                            <strong style="color: var(--accent-color);">✅ Programación MQL5</strong><br>
+                            - Funciones y eventos<br>
+                            - Manejo de errores<br>
+                            - Organización de código
+                        </div>
+                        <div>
+                            <strong style="color: var(--accent-color);">✅ Estrategias Profesionales</strong><br>
+                            - La V durante NY<br>
+                            - Vela de 1h en 1m<br>
+                            - Oro los fines de semana
+                        </div>
+                        <div>
+                            <strong style="color: var(--accent-color);">✅ Criptomonedas</strong><br>
+                            - Trading de cripto<br>
+                            - Exchanges DEX/CEX<br>
+                            - Estrategias específicas
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 40px;">
+                    <a href="index.html#contact" class="btn btn-primary" style="background: white; color: var(--secondary-color); padding: 18px 48px; font-size: 1.2rem; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
+                        <i class="fas fa-envelope"></i>
+                        Contactar para Contenido Completo
+                    </a>
+                    <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.9;">
+                        O visita mi canal de YouTube para tutoriales gratuitos
+                    </p>
+                </div>
+            </div>
+
+            <!-- Más secciones pueden agregarse aquí siguiendo la misma estructura -->
+            
+            <!-- Footer del contenido -->
+            <div style="background: var(--bg-secondary); padding: 40px; border-radius: var(--border-radius); margin-top: 60px; text-align: center;">
+                <h3 style="color: var(--primary-color); margin-bottom: 20px;">
+                    ¿Listo para dominar el trading algorítmico?
+                </h3>
+                <p style="color: var(--text-secondary); margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Continúa tu aprendizaje explorando mis bots de trading, recursos gratuitos y 
+                    cursos especializados.
+                </p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="index.html#bots" class="btn btn-primary">
+                        <i class="fas fa-robot"></i>
+                        Ver Mis Bots
+                    </a>
+                    <a href="index.html#teaching" class="btn btn-secondary">
+                        <i class="fas fa-graduation-cap"></i>
+                        Ver Cursos
+                    </a>
+                    <a href="https://www.mql5.com/en/users/joel_pasapera" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-download"></i>
+                        Descargar Recursos
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Barra de Progreso -->
+    <div class="progress-indicator">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Botón Volver Arriba -->
+    <div class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Toggle Sidebar en móvil
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebarNav');
+            const overlay = document.querySelector('.sidebar-overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('visible');
+        }
+
+        // Toggle secciones del menú
+        function toggleSection(element) {
+            const section = element.parentElement;
+            section.classList.toggle('open');
+        }
+
+        // Scroll progress
+        window.addEventListener('scroll', () => {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            document.getElementById('progressBar').style.height = scrolled + '%';
+            
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // Scroll to top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Cerrar sidebar en móvil
+                    if (window.innerWidth <= 1024) {
+                        toggleSidebar();
+                    }
+                    
+                    // Actualizar link activo
+                    document.querySelectorAll('.nav-subsection-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Búsqueda simple
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const sections = document.querySelectorAll('.nav-subsection-link');
+            
+            sections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    section.style.display = 'block';
+                    section.parentElement.parentElement.classList.add('open');
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+            
+            // Si no hay búsqueda, mostrar todo
+            if (searchTerm === '') {
+                sections.forEach(section => {
+                    section.style.display = 'block';
+                });
+            }
+        });
+
+        // Highlight sección actual al hacer scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.content-section');
+            const navLinks = document.querySelectorAll('.nav-subsection-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Hamburger menu (de la nav principal)
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+        }
+
+        console.log('📚 Academia de Trading cargada correctamente');
+    </script>
+</body>
+
+</html>
