@@ -22,15 +22,48 @@
     <link rel="stylesheet" href="Style.css">
     
     <style>
+        /* MEJORAS PARA PANTALLAS GRANDES */
+        @media (min-width: 1400px) {
+            .main-content {
+                padding: 40px 80px;
+            }
+            
+            .main-content-inner {
+                max-width: 1400px;
+            }
+        }
+        
+        @media (min-width: 1920px) {
+            .main-content {
+                padding: 40px 120px;
+            }
+            
+            .main-content-inner {
+                max-width: 1600px;
+            }
+        }
+        
+        /* Asegurar que el contenido use todo el espacio disponible */
+        .content-section, 
+        .content-header,
+        .breadcrumbs {
+            max-width: none;
+            width: 100%;
+        }
+
+        
         /* Estilos específicos para la Academia */
         .academia-layout {
-            display: grid;
+            display: grid; /* grid */
             grid-template-columns: 300px 1fr;
             min-height: 100vh;
             padding-top: 70px;
             background: var(--bg-secondary);
+            width: 100%;
+            max-width: 100vw; /* Asegura que use todo el ancho */
+            overflow-x: hidden; /* Previene scroll horizontal */
         }
-
+        
         /* Navegación Lateral */
         .sidebar-nav {
             position: fixed;
@@ -170,13 +203,15 @@
         /* Contenido Principal */
         .main-content {
             margin-left: 300px;
-            padding: 40px 60px 40px 60px;
-            max-width: 1200px;
-            width: 100%;
+            padding: 40px;
+            width: calc(100% - 300px);
+            display: flex;
+            justify-content: center;
         }
         
-        .main-content > * {
-            max-width: 900px;
+        .main-content-inner {
+            max-width: 1200px; /* el límite aquí */
+            width: 100%;
         }
 
         .content-header {
