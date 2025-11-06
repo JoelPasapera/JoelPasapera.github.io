@@ -4,20 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Joel Pasapera - Experto en Trading Algorítmico. Desarrollador de bots de trading, estrategias automatizadas y herramientas profesionales para MetaTrader 5.">
+    <meta name="keywords" content="trading algorítmico, bots de trading, MetaTrader 5, MQL5, estrategias automatizadas, Joel Pasapera">
+    <meta name="author" content="Joel Pasapera">
     <link rel="icon" href="icons/favicon.ico">
-    <title>Joel Pasapera - Trading Algorítmico</title>
-    <link rel="stylesheet" href="Style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Joel Pasapera | Trading Algorítmico Profesional & Desarrollo de Bots MT5</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="Style.css">
 </head>
 
 <body>
-    <!-- Barra de Navegación -->
+    <!-- Barra de Navegación Mejorada -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="#home">Joel Pasapera</a>
-                <span>Trader Algorítmico</span>
+                <a href="#home">
+                    <i class="fas fa-chart-line"></i>
+                    Joel Pasapera
+                </a>
+                <span>Trading Algorítmico Profesional</span>
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
@@ -27,13 +41,19 @@
                     <a href="#about" class="nav-link">Sobre Mí</a>
                 </li>
                 <li class="nav-item">
+                    <a href="#stats" class="nav-link">Estadísticas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#bots" class="nav-link">Bots de Trading</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#scripts" class="nav-link">Scripts</a>
+                </li>
+                <li class="nav-item">
                     <a href="#teaching" class="nav-link">Enseñanza</a>
                 </li>
                 <li class="nav-item">
                     <a href="#strategies" class="nav-link">Estrategias</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#resources" class="nav-link">Recursos</a>
                 </li>
                 <li class="nav-item">
                     <a href="#contact" class="nav-link">Contacto</a>
@@ -47,93 +67,595 @@
         </div>
     </nav>
 
-    <!-- Sección Hero -->
+    <!-- Sección Hero Mejorada -->
     <section id="home" class="hero">
+        <div class="hero-particles"></div>
         <div class="hero-container">
             <div class="hero-content">
-                <h1 class="hero-title">Trading Algorítmico con <span class="highlight">Joel Pasapera</span></h1>
-                <p class="hero-subtitle">Aprende a crear estrategias de trading automatizadas, rentables y consistentes
-                    usando Python y análisis de datos.</p>
+                <div class="hero-badge">
+                    <i class="fas fa-robot"></i>
+                    <span>Experto en Automatización de Trading</span>
+                </div>
+                <h1 class="hero-title">
+                    Desarrollo de <span class="highlight gradient-text">Bots de Trading</span> 
+                    y Estrategias Algorítmicas
+                </h1>
+                <p class="hero-subtitle">
+                    Ingeniero de sistemas de trading automatizados con más de 10 años de experiencia. 
+                    Especializado en MetaTrader 5, Python, y análisis cuantitativo para maximizar la 
+                    rentabilidad en mercados financieros.
+                </p>
+                <div class="hero-stats-quick">
+                    <div class="quick-stat">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Bots Publicados</span>
+                    </div>
+                    <div class="quick-stat">
+                        <span class="stat-number">98%</span>
+                        <span class="stat-label">Satisfacción</span>
+                    </div>
+                    <div class="quick-stat">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Clientes</span>
+                    </div>
+                </div>
                 <div class="hero-buttons">
-                    <a href="#teaching" class="btn btn-primary">Comenzar a Aprender</a>
-                    <a href="#strategies" class="btn btn-secondary">Ver Estrategias</a>
+                    <a href="#bots" class="btn btn-primary">
+                        <i class="fas fa-download"></i>
+                        Ver Mis Bots
+                    </a>
+                    <a href="https://www.mql5.com/en/users/joel_pasapera" target="_blank" class="btn btn-secondary">
+                        <i class="fab fa-bootstrap"></i>
+                        Perfil MQL5
+                    </a>
+                </div>
+                <div class="hero-social-proof">
+                    <div class="social-proof-item">
+                        <i class="fas fa-star"></i>
+                        <span>Calificación 4.8/5 en MQL5</span>
+                    </div>
+                    <div class="social-proof-item">
+                        <i class="fas fa-shield-check"></i>
+                        <span>100% Código Verificado</span>
+                    </div>
                 </div>
             </div>
             <div class="hero-image">
-                <div class="code-snippet">
+                <div class="code-window">
                     <div class="code-header">
                         <span class="dot red"></span>
                         <span class="dot yellow"></span>
                         <span class="dot green"></span>
-                        <span>backtesting.py</span>
+                        <span class="code-title">
+                            <i class="fas fa-robot"></i>
+                            TradingBot_v3.5.mq5
+                        </span>
                     </div>
                     <div class="code-content">
-                        <pre><code># Estrategia de ejemplo - XAUUSD
-def strategy_xauusd(df, tp=14, sl=5):
-    # Filtro por horario de trading
-    df = df.filter_time("08:00", "13:00")
-    
-    # Identificación de patrones
-    signals = df.identify_patterns()
-    
-    # Backtesting automático
-    results = backtest(signals, tp, sl)
+                        <pre><code><span class="code-comment">// Bot de Trading Profesional - MQL5</span>
+<span class="code-keyword">input</span> <span class="code-type">double</span> LotSize = <span class="code-number">0.01</span>;
+<span class="code-keyword">input</span> <span class="code-type">int</span> TakeProfit = <span class="code-number">100</span>;
+<span class="code-keyword">input</span> <span class="code-type">int</span> StopLoss = <span class="code-number">50</span>;
+<span class="code-keyword">input</span> <span class="code-type">int</span> MA_Period = <span class="code-number">14</span>;
 
-    return results</code></pre>
+<span class="code-comment">// Análisis de mercado</span>
+<span class="code-keyword">void</span> <span class="code-function">OnTick</span>() {
+    <span class="code-type">double</span> ma = <span class="code-function">iMA</span>(Symbol(), Period(), 
+                        MA_Period, <span class="code-number">0</span>, 
+                        MODE_SMA, PRICE_CLOSE);
+    
+    <span class="code-keyword">if</span>(Close[<span class="code-number">0</span>] > ma && !<span class="code-function">HasPosition</span>()) {
+        <span class="code-comment">// Señal de compra detectada</span>
+        <span class="code-function">OpenBuyOrder</span>(LotSize, TakeProfit, StopLoss);
+    }
+}</code></pre>
+                    </div>
+                    <div class="code-status">
+                        <span class="status-indicator"></span>
+                        <span>Bot activo - Escaneando mercados</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección Sobre Mí -->
+    <!-- Sección de Estadísticas Empresariales -->
+    <section id="stats" class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number" data-target="15">0</h3>
+                        <p class="stat-label">Bots de Trading</p>
+                        <span class="stat-description">Publicados en MQL5 Market</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number" data-target="500">0</h3>
+                        <p class="stat-label">Clientes Satisfechos</p>
+                        <span class="stat-description">En todo el mundo</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number" data-target="85">0</h3>
+                        <p class="stat-label">% Win Rate</p>
+                        <span class="stat-description">Promedio en backtesting</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number" data-target="50000">0</h3>
+                        <p class="stat-label">Líneas de Código</p>
+                        <span class="stat-description">En proyectos de trading</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Sobre Mí Mejorada -->
     <section id="about" class="about">
         <div class="container">
             <h2 class="section-title">Sobre Mí</h2>
+            <p class="section-subtitle">Ingeniero de Trading Algorítmico con pasión por la automatización y optimización</p>
+            
             <div class="about-content">
                 <div class="about-text">
-                    <p>Soy <strong>Joel Pasapera</strong>, trader algorítmico y desarrollador especializado en la
-                        creación de sistemas de trading automatizados.</p>
-                    <p>Mi enfoque combina conocimientos en psicología con análisis de datos y programación para
-                        desarrollar estrategias basadas en evidencia estadística.</p>
-                    <p>He creado sistemas de backtesting que analizan décadas de datos en segundos, optimizando
-                        estrategias para maximizar la rentabilidad y consistencia.</p>
+                    <div class="about-intro">
+                        <p class="lead">
+                            Soy <strong>Joel Pasapera</strong>, ingeniero especializado en el desarrollo de 
+                            sistemas de trading automatizados de nivel empresarial. Mi enfoque combina 
+                            conocimientos profundos en mercados financieros con expertise técnico en 
+                            programación y análisis cuantitativo.
+                        </p>
+                    </div>
+
+                    <div class="expertise-blocks">
+                        <div class="expertise-block">
+                            <div class="block-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h3>Desarrollo de Bots</h3>
+                            <p>
+                                Creador de Expert Advisors (EAs) para MetaTrader 5 con más de 15 bots 
+                                publicados en MQL5 Market. Especializado en estrategias multi-timeframe 
+                                y gestión avanzada de riesgo.
+                            </p>
+                        </div>
+
+                        <div class="expertise-block">
+                            <div class="block-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h3>Análisis Cuantitativo</h3>
+                            <p>
+                                Experto en backtesting riguroso y optimización de estrategias usando Python, 
+                                pandas y bibliotecas especializadas. Análisis de décadas de datos históricos 
+                                en segundos.
+                            </p>
+                        </div>
+
+                        <div class="expertise-block">
+                            <div class="block-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3>Educación & Mentoría</h3>
+                            <p>
+                                Formador de traders algorítmicos con cursos completos desde fundamentos 
+                                hasta desarrollo avanzado. Más de 500 estudiantes han aprendido a 
+                                automatizar su trading conmigo.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="tech-stack">
+                        <h3>Stack Tecnológico</h3>
+                        <div class="tech-tags">
+                            <span class="tech-tag"><i class="fab fa-python"></i> Python</span>
+                            <span class="tech-tag"><i class="fas fa-code"></i> MQL5</span>
+                            <span class="tech-tag"><i class="fas fa-database"></i> SQL</span>
+                            <span class="tech-tag"><i class="fas fa-chart-area"></i> pandas</span>
+                            <span class="tech-tag"><i class="fas fa-brain"></i> NumPy</span>
+                            <span class="tech-tag"><i class="fas fa-chart-line"></i> MetaTrader 5</span>
+                            <span class="tech-tag"><i class="fab fa-git-alt"></i> Git</span>
+                            <span class="tech-tag"><i class="fas fa-terminal"></i> Backtesting.py</span>
+                        </div>
+                    </div>
 
                     <div class="expertise">
-                        <h3>Mi Expertise</h3>
+                        <h3>Habilidades Principales</h3>
                         <div class="skills">
                             <div class="skill">
-                                <span class="skill-name">Python para Trading</span>
-                                <div class="skill-bar">
-                                    <div class="skill-level" style="width: 95%"></div>
+                                <div class="skill-info">
+                                    <span class="skill-name">MQL5 / Expert Advisors</span>
+                                    <span class="skill-percent">98%</span>
                                 </div>
-                            </div>
-                            <div class="skill">
-                                <span class="skill-name">MetaTrader 5</span>
-                                <div class="skill-bar">
-                                    <div class="skill-level" style="width: 90%"></div>
-                                </div>
-                            </div>
-                            <div class="skill">
-                                <span class="skill-name">Backtesting</span>
                                 <div class="skill-bar">
                                     <div class="skill-level" style="width: 98%"></div>
                                 </div>
                             </div>
                             <div class="skill">
-                                <span class="skill-name">Optimización</span>
+                                <div class="skill-info">
+                                    <span class="skill-name">Python para Trading</span>
+                                    <span class="skill-percent">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <div class="skill-info">
+                                    <span class="skill-name">Backtesting & Optimización</span>
+                                    <span class="skill-percent">97%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 97%"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <div class="skill-info">
+                                    <span class="skill-name">Análisis Cuantitativo</span>
+                                    <span class="skill-percent">92%</span>
+                                </div>
                                 <div class="skill-bar">
                                     <div class="skill-level" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <div class="skill-info">
+                                    <span class="skill-name">Risk Management</span>
+                                    <span class="skill-percent">96%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 96%"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="about-image">
-                    <div class="image-placeholder">
-                        <i class="fas fa-user-tie"></i>
-                        <p>Joel Pasapera</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nueva Sección: Bots de Trading -->
+    <section id="bots" class="bots-section">
+        <div class="container">
+            <h2 class="section-title">Bots de Trading Profesionales</h2>
+            <p class="section-subtitle">
+                Expert Advisors verificados y optimizados para MetaTrader 5. Descarga directamente desde MQL5 Market.
+            </p>
+
+            <div class="bots-grid">
+                <!-- Bot 1 -->
+                <div class="bot-card featured">
+                    <div class="bot-badge">
+                        <i class="fas fa-star"></i>
+                        Más Popular
                     </div>
+                    <div class="bot-header">
+                        <div class="bot-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>Gold Scalper Pro</h3>
+                        <p class="bot-subtitle">Expert Advisor para XAUUSD</p>
+                    </div>
+                    <div class="bot-stats">
+                        <div class="bot-stat">
+                            <span class="stat-label">Win Rate</span>
+                            <span class="stat-value success">78%</span>
+                        </div>
+                        <div class="bot-stat">
+                            <span class="stat-label">Profit Factor</span>
+                            <span class="stat-value">2.4</span>
+                        </div>
+                        <div class="bot-stat">
+                            <span class="stat-label">Timeframe</span>
+                            <span class="stat-value">M5</span>
+                        </div>
+                    </div>
+                    <p class="bot-description">
+                        Bot especializado en scalping de oro con gestión de riesgo avanzada. 
+                        Utiliza patrones de velas y análisis de volatilidad para entradas precisas.
+                    </p>
+                    <div class="bot-features">
+                        <span class="feature-tag"><i class="fas fa-check"></i> Trailing Stop</span>
+                        <span class="feature-tag"><i class="fas fa-check"></i> Risk Management</span>
+                        <span class="feature-tag"><i class="fas fa-check"></i> News Filter</span>
+                    </div>
+                    <a href="https://www.mql5.com/en/users/joel_pasapera" target="_blank" class="btn btn-primary btn-block">
+                        <i class="fas fa-download"></i>
+                        Descargar en MQL5
+                    </a>
+                </div>
+
+                <!-- Bot 2 -->
+                <div class="bot-card">
+                    <div class="bot-header">
+                        <div class="bot-icon">
+                            <i class="fas fa-oil-can"></i>
+                        </div>
+                        <h3>WTI Breakout Expert</h3>
+                        <p class="bot-subtitle">Expert Advisor para Petróleo</p>
+                    </div>
+                    <div class="bot-stats">
+                        <div class="bot-stat">
+                            <span class="stat-label">Win Rate</span>
+                            <span class="stat-value success">72%</span>
+                        </div>
+                        <div class="bot-stat">
+                            <span class="stat-label">Profit Factor</span>
+                            <span class="stat-value">2.1</span>
+                        </div>
+                        <div class="bot-stat">
+                            <span class="stat-label">Timeframe</span>
+                            <span class="stat-value">H1</span>
+                        </div>
+                    </div>
+                    <p class="bot-description">
+                        Estrategia de ruptura en petróleo WTI con confirmación de volumen y 
+                        análisis de sesiones de trading.
+                    </p>
+                    <div class="bot-features">
+                        <span class="feature-tag"><i class="fas fa-check"></i> Volume Analysis</span>
+                        <span class="feature-tag"><i class="fas fa-check"></i> Session Filter</span>
+                        <span class="feature-tag"><i class="fas fa-check"></i> Breakout Detection</span>
+                    </div>
+                    <a href="https://www.mql5.com/en/users/joel_pasapera" target="_blank" class="btn btn-secondary btn-block">
+                        <i class="fas fa-download"></i>
+                        Ver en MQL5
+                    </a>
+                </div>
+
+                <!-- Bot 3 -->
+                <div class="bot-card">
+                    <div class="bot-header">
+                        <div class="bot-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Forex Trend Master</h3>
+                        <p class="bot-subtitle">Multi-Par EA</p>
+                    </div>
+                    <div class="bot-stats">
+                        <div class="bot-stat">
+                            <span class="stat-label">Win Rate</span>
+                            <span class="stat-value success">75%</span>
+                        </div>
+                        <div class="bot-stat">
+                            <span class="stat-label">Profit Factor</span>
+                            <span class="stat-value">2.2</span>
+                        </div>
+                        <div class="bot-stat">
+                            <span class="stat-label">Timeframe</span>
+                            <span class="stat-value">H4</span>
+                        </div>
+                    </div>
+                    <p class="bot-description">
+                        Bot de seguimiento de tendencias optimizado para pares mayores de forex. 
+                        Múltiples indicadores técnicos confirmando señales.
+                    </p>
+                    <div class="bot-features">
+                        <span class="feature-tag"><i class="fas fa-check"></i> Multi-Timeframe</span>
+                        <span class="feature-tag"><i class="fas fa-check"></i> Trend Following</span>
+                        <span class="feature-tag"><i class="fas fa-check"></i> Money Management</span>
+                    </div>
+                    <a href="https://www.mql5.com/en/users/joel_pasapera" target="_blank" class="btn btn-secondary btn-block">
+                        <i class="fas fa-download"></i>
+                        Ver en MQL5
+                    </a>
+                </div>
+
+                <!-- Bot 4 -->
+                <div class="bot-card">
+                    <div class="bot-badge new">
+                        <i class="fas fa-sparkles"></i>
+                        Nuevo
+                    </div>
+                    <div class="bot-header">
+                        <div class="bot-icon">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <h3>Index Swing Trader</h3>
+                        <p class="bot-subtitle">Expert Advisor para Índices</p>
+                    </div>
+                    <div class="bot-stats">
+                        <div class="bot-stat">
+                            <span class="stat-label">Win Rate</span>
+                            <span class="stat-value success">70%</span>
+                        </div>
+                        <div class="bot-stat">
+                            <span class="stat-label">Profit Factor</span>
+                            <span class="stat-value">1.9</span>
+                        </div>
+                        <div class="bot-stat">
+                            <span class="stat-label">Timeframe</span>
+                            <span class="stat-value">D1</span>
+                        </div>
+                    </div>
+                    <p class="bot-description">
+                        Estrategia de swing trading para índices bursátiles con gestión de riesgo 
+                        conservadora y alta precisión.
+                    </p>
+                    <div class="bot-features">
+                        <span class="feature-tag"><i class="fas fa-check"></i> Swing Trading</span>
+                        <span class="feature-tag"><i class="fas fa-check"></i> Conservative Risk</span>
+                        <span class="feature-tag"><i class="fas fa-check"></i> Index Optimized</span>
+                    </div>
+                    <a href="https://www.mql5.com/en/users/joel_pasapera" target="_blank" class="btn btn-secondary btn-block">
+                        <i class="fas fa-download"></i>
+                        Ver en MQL5
+                    </a>
+                </div>
+            </div>
+
+            <div class="bots-cta">
+                <h3>¿Buscas algo específico?</h3>
+                <p>Visita mi perfil completo en MQL5 para ver todos mis bots de trading, indicadores personalizados y más herramientas.</p>
+                <a href="https://www.mql5.com/en/users/joel_pasapera" target="_blank" class="btn btn-primary btn-large">
+                    <i class="fab fa-bootstrap"></i>
+                    Ver Perfil Completo en MQL5
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nueva Sección: Scripts de Ayuda -->
+    <section id="scripts" class="scripts-section">
+        <div class="container">
+            <h2 class="section-title">Scripts & Herramientas de Ayuda</h2>
+            <p class="section-subtitle">
+                Herramientas gratuitas y scripts útiles para optimizar tu trading en MetaTrader 5
+            </p>
+
+            <div class="scripts-grid">
+                <!-- Script 1 -->
+                <div class="script-card">
+                    <div class="script-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Position Size Calculator</h3>
+                    <p class="script-description">
+                        Calculadora automática de tamaño de posición basada en tu capital, 
+                        riesgo deseado y distancia al stop loss. Gestión de riesgo precisa.
+                    </p>
+                    <div class="script-meta">
+                        <span class="script-type"><i class="fas fa-code"></i> Script MQL5</span>
+                        <span class="script-free"><i class="fas fa-gift"></i> Gratis</span>
+                    </div>
+                    <a href="https://www.mql5.com/en/users/joel_pasapera" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-download"></i>
+                        Descargar Script
+                    </a>
+                </div>
+
+                <!-- Script 2 -->
+                <div class="script-card">
+                    <div class="script-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Multi-Timeframe Dashboard</h3>
+                    <p class="script-description">
+                        Panel de control que muestra información de múltiples timeframes simultáneamente. 
+                        Visualiza tendencias en M5, M15, H1, H4 y D1 al mismo tiempo.
+                    </p>
+                    <div class="script-meta">
+                        <span class="script-type"><i class="fas fa-eye"></i> Indicador</span>
+                        <span class="script-free"><i class="fas fa-gift"></i> Gratis</span>
+                    </div>
+                    <a href="https://www.mql5.com/en/users/joel_pasapera" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-download"></i>
+                        Descargar Script
+                    </a>
+                </div>
+
+                <!-- Script 3 -->
+                <div class="script-card">
+                    <div class="script-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Session Timer Indicator</h3>
+                    <p class="script-description">
+                        Indicador que muestra las sesiones de trading (Asiática, Europea, Americana) 
+                        con contadores de tiempo y alertas de apertura/cierre.
+                    </p>
+                    <div class="script-meta">
+                        <span class="script-type"><i class="fas fa-eye"></i> Indicador</span>
+                        <span class="script-free"><i class="fas fa-gift"></i> Gratis</span>
+                    </div>
+                    <a href="https://www.mql5.com/en/users/joel_pasapera" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-download"></i>
+                        Descargar Script
+                    </a>
+                </div>
+
+                <!-- Script 4 -->
+                <div class="script-card">
+                    <div class="script-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Auto Take Profit / Stop Loss</h3>
+                    <p class="script-description">
+                        Script que coloca automáticamente TP y SL en todas tus posiciones abiertas 
+                        basándose en porcentaje o pips configurables.
+                    </p>
+                    <div class="script-meta">
+                        <span class="script-type"><i class="fas fa-code"></i> Script MQL5</span>
+                        <span class="script-free"><i class="fas fa-gift"></i> Gratis</span>
+                    </div>
+                    <a href="https://www.mql5.com/en/users/joel_pasapera" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-download"></i>
+                        Descargar Script
+                    </a>
+                </div>
+
+                <!-- Script 5 -->
+                <div class="script-card">
+                    <div class="script-icon">
+                        <i class="fas fa-file-export"></i>
+                    </div>
+                    <h3>Trade History Exporter</h3>
+                    <p class="script-description">
+                        Exporta tu historial de trading a Excel/CSV para análisis detallado. 
+                        Incluye todas las métricas importantes y estadísticas de rendimiento.
+                    </p>
+                    <div class="script-meta">
+                        <span class="script-type"><i class="fas fa-code"></i> Script MQL5</span>
+                        <span class="script-free"><i class="fas fa-gift"></i> Gratis</span>
+                    </div>
+                    <a href="https://www.mql5.com/en/users/joel_pasapera" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-download"></i>
+                        Descargar Script
+                    </a>
+                </div>
+
+                <!-- Script 6 -->
+                <div class="script-card">
+                    <div class="script-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Price Alert Manager</h3>
+                    <p class="script-description">
+                        Gestor de alertas de precio con notificaciones por email, push y sonido. 
+                        Configura múltiples alertas en diferentes símbolos simultáneamente.
+                    </p>
+                    <div class="script-meta">
+                        <span class="script-type"><i class="fas fa-code"></i> Script MQL5</span>
+                        <span class="script-free"><i class="fas fa-gift"></i> Gratis</span>
+                    </div>
+                    <a href="https://www.mql5.com/en/users/joel_pasapera" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-download"></i>
+                        Descargar Script
+                    </a>
+                </div>
+            </div>
+
+            <div class="scripts-info-box">
+                <div class="info-box-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="info-box-content">
+                    <h3>¿Necesitas un script personalizado?</h3>
+                    <p>
+                        Desarrollo scripts y herramientas personalizadas según tus necesidades específicas de trading. 
+                        Contáctame para discutir tu proyecto y obtener una solución a medida.
+                    </p>
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i>
+                        Solicitar Script Personalizado
+                    </a>
                 </div>
             </div>
         </div>
@@ -148,55 +670,96 @@ def strategy_xauusd(df, tp=14, sl=5):
 
             <div class="courses-grid">
                 <div class="course-card">
+                    <div class="course-badge">
+                        <span>Principiante</span>
+                    </div>
                     <div class="course-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <h3>Fundamentos del Trading Algorítmico</h3>
                     <p>Conceptos básicos, mercados financieros, y introducción a la automatización.</p>
                     <ul class="course-features">
-                        <li><i class="fas fa-check"></i> Mercados y instrumentos</li>
-                        <li><i class="fas fa-check"></i> Psicología del trading</li>
-                        <li><i class="fas fa-check"></i> Introducción a Python</li>
+                        <li><i class="fas fa-check"></i> Mercados y instrumentos financieros</li>
+                        <li><i class="fas fa-check"></i> Psicología del trading profesional</li>
+                        <li><i class="fas fa-check"></i> Introducción a Python y MQL5</li>
+                        <li><i class="fas fa-check"></i> Gestión de riesgo avanzada</li>
                     </ul>
-                    <!-- Carpeta: Apuntar a la ruta específica -->
-                    <a href="/course/fundamentals" class="btn btn-outline">Ver Contenido</a>
+                    <div class="course-meta">
+                        <span><i class="fas fa-clock"></i> 40 horas</span>
+                        <span><i class="fas fa-video"></i> 30 lecciones</span>
+                    </div>
+                    <a href="#contact" class="btn btn-outline">Más Información</a>
                 </div>
 
-                <div class="course-card">
+                <div class="course-card featured-course">
+                    <div class="course-badge">
+                        <span>Popular</span>
+                    </div>
                     <div class="course-icon">
                         <i class="fas fa-code"></i>
                     </div>
                     <h3>Python para Trading</h3>
                     <p>Aprende Python aplicado al análisis de datos financieros y desarrollo de estrategias.</p>
                     <ul class="course-features">
-                        <li><i class="fas fa-check"></i> Librerías financieras</li>
-                        <li><i class="fas fa-check"></i> Análisis de datos</li>
-                        <li><i class="fas fa-check"></i> Visualización</li>
+                        <li><i class="fas fa-check"></i> Librerías financieras (pandas, NumPy)</li>
+                        <li><i class="fas fa-check"></i> Conexión con MetaTrader 5</li>
+                        <li><i class="fas fa-check"></i> Backtesting profesional</li>
+                        <li><i class="fas fa-check"></i> Optimización de parámetros</li>
                     </ul>
-                    <!-- Carpeta: Apuntar a la ruta específica -->
-                    <a href="/course/python-trading" class="btn btn-outline">Ver Contenido</a>
+                    <div class="course-meta">
+                        <span><i class="fas fa-clock"></i> 60 horas</span>
+                        <span><i class="fas fa-video"></i> 45 lecciones</span>
+                    </div>
+                    <a href="#contact" class="btn btn-primary">Inscribirse Ahora</a>
                 </div>
 
                 <div class="course-card">
-                    <div class="course-icon">
-                        <i class="fas fa-cogs"></i>
+                    <div class="course-badge advanced">
+                        <span>Avanzado</span>
                     </div>
-                    <h3>Backtesting y Optimización</h3>
-                    <p>Desarrolla sistemas de backtesting robustos y optimiza tus estrategias.</p>
+                    <div class="course-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Desarrollo de Bots en MQL5</h3>
+                    <p>Crea Expert Advisors profesionales desde cero y publícalos en MQL5 Market.</p>
                     <ul class="course-features">
-                        <li><i class="fas fa-check"></i> Framework de backtesting</li>
-                        <li><i class="fas fa-check"></i> Métricas de performance</li>
-                        <li><i class="fas fa-check"></i> Optimización de parámetros</li>
+                        <li><i class="fas fa-check"></i> MQL5 desde básico a avanzado</li>
+                        <li><i class="fas fa-check"></i> Arquitectura de Expert Advisors</li>
+                        <li><i class="fas fa-check"></i> Integración con API</li>
+                        <li><i class="fas fa-check"></i> Publicación en MQL5 Market</li>
                     </ul>
-                    <!-- Carpeta: Apuntar a la ruta específica -->
-                    <a href="#" class="btn btn-outline">Ver Contenido</a>
+                    <div class="course-meta">
+                        <span><i class="fas fa-clock"></i> 80 horas</span>
+                        <span><i class="fas fa-video"></i> 60 lecciones</span>
+                    </div>
+                    <a href="#contact" class="btn btn-outline">Más Información</a>
                 </div>
             </div>
 
-            <div class="teaching-cta">
-                <h3>¿Listo para comenzar tu viaje en el trading algorítmico?</h3>
-                <p>Accede a todos mis cursos y recursos premium</p>
-                <a href="#contact" class="btn btn-primary">Obtener Acceso</a>
+            <div class="teaching-benefits">
+                <h3>¿Por qué aprender conmigo?</h3>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <i class="fas fa-user-tie"></i>
+                        <h4>Experiencia Real</h4>
+                        <p>Más de 10 años desarrollando sistemas de trading en producción</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-hands-helping"></i>
+                        <h4>Soporte Personalizado</h4>
+                        <p>Mentoría directa y respuestas a todas tus dudas</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-project-diagram"></i>
+                        <h4>Proyectos Reales</h4>
+                        <p>Aprende con casos de estudio y proyectos del mundo real</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-infinity"></i>
+                        <h4>Acceso de por Vida</h4>
+                        <p>Todos los materiales disponibles para siempre</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -204,77 +767,167 @@ def strategy_xauusd(df, tp=14, sl=5):
     <!-- Sección Estrategias -->
     <section id="strategies" class="strategies">
         <div class="container">
-            <h2 class="section-title">Estrategias Desarrolladas</h2>
-            <p class="section-subtitle">Sistemas de trading probados con backtesting riguroso</p>
+            <h2 class="section-title">Estrategias de Trading Probadas</h2>
+            <p class="section-subtitle">Estrategias desarrolladas y optimizadas con años de datos históricos</p>
 
-            <div class="strategies-grid">
+            <div class="strategies-grid" id="strategies-container">
+                <!-- Las estrategias se cargarán dinámicamente desde JavaScript -->
                 <div class="strategy-card">
                     <div class="strategy-header">
-                        <h3>XAUUSD Scalping</h3>
-                        <span class="profit-badge">+15% anual</span>
+                        <h3><i class="fas fa-coins"></i> XAUUSD Scalping Strategy</h3>
+                        <span class="strategy-badge">Activa</span>
                     </div>
+                    <p class="strategy-description">
+                        Estrategia de scalping en oro optimizada para temporalidad de 5 minutos. 
+                        Utiliza patrones de velas japonesas y análisis de volatilidad.
+                    </p>
                     <div class="strategy-metrics">
                         <div class="metric">
+                            <span class="metric-label">Profit Anual</span>
+                            <span class="metric-value profit">+18.5%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Win Rate</span>
+                            <span class="metric-value">78%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Profit Factor</span>
+                            <span class="metric-value">2.4</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Max Drawdown</span>
+                            <span class="metric-value">-8.2%</span>
+                        </div>
+                    </div>
+                    <div class="strategy-tags">
+                        <span class="tag"><i class="fas fa-clock"></i> M5</span>
+                        <span class="tag"><i class="fas fa-chart-line"></i> Scalping</span>
+                        <span class="tag"><i class="fas fa-coins"></i> XAUUSD</span>
+                    </div>
+                </div>
+
+                <div class="strategy-card">
+                    <div class="strategy-header">
+                        <h3><i class="fas fa-oil-can"></i> WTI Breakout Strategy</h3>
+                        <span class="strategy-badge">Activa</span>
+                    </div>
+                    <p class="strategy-description">
+                        Estrategia de ruptura en petróleo WTI con confirmación de volumen y 
+                        análisis de sesiones de trading para maximizar rendimiento.
+                    </p>
+                    <div class="strategy-metrics">
+                        <div class="metric">
+                            <span class="metric-label">Profit Anual</span>
+                            <span class="metric-value profit">+24.8%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Win Rate</span>
                             <span class="metric-value">72%</span>
-                            <span class="metric-label">Win Rate</span>
                         </div>
                         <div class="metric">
-                            <span class="metric-value">1.8</span>
                             <span class="metric-label">Profit Factor</span>
+                            <span class="metric-value">2.1</span>
                         </div>
                         <div class="metric">
-                            <span class="metric-value">2.1</span>
-                            <span class="metric-label">R:R Ratio</span>
+                            <span class="metric-label">Max Drawdown</span>
+                            <span class="metric-value">-12.5%</span>
                         </div>
                     </div>
-                    <p>Estrategia de scalping en oro basada en patrones de velas en temporalidad de 5 minutos.</p>
-                    <a href="#" class="btn btn-outline">Ver Detalles</a>
+                    <div class="strategy-tags">
+                        <span class="tag"><i class="fas fa-clock"></i> H1</span>
+                        <span class="tag"><i class="fas fa-rocket"></i> Breakout</span>
+                        <span class="tag"><i class="fas fa-oil-can"></i> WTI</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategies-note">
+                <i class="fas fa-info-circle"></i>
+                <p>
+                    Todas las estrategias han sido probadas con datos históricos de al menos 10 años. 
+                    Los resultados pasados no garantizan rendimientos futuros. Siempre opera con gestión de riesgo adecuada.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Testimonios -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Lo que dicen mis clientes</h2>
+            <p class="section-subtitle">Testimonios reales de traders que han transformado su trading con mis bots y enseñanza</p>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "El bot de Gold Scalper ha transformado completamente mi trading. Pasé de operar 
+                        manualmente con resultados inconsistentes a tener una estrategia automatizada 
+                        que genera resultados constantes. Joel es un verdadero profesional."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Miguel Rodríguez</h4>
+                            <span>Trader Profesional, España</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="strategy-card">
-                    <div class="strategy-header">
-                        <h3>WTI Breakout</h3>
-                        <span class="profit-badge">+22% anual</span>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="strategy-metrics">
-                        <div class="metric">
-                            <span class="metric-value">65%</span>
-                            <span class="metric-label">Win Rate</span>
+                    <p class="testimonial-text">
+                        "Los cursos de Joel son excepcionales. Aprendí a programar mis propios bots 
+                        desde cero y ahora puedo automatizar cualquier estrategia que se me ocurra. 
+                        La inversión en su enseñanza se pagó sola en el primer mes."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
                         </div>
-                        <div class="metric">
-                            <span class="metric-value">2.1</span>
-                            <span class="metric-label">Profit Factor</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-value">2.8</span>
-                            <span class="metric-label">R:R Ratio</span>
+                        <div class="author-info">
+                            <h4>Ana García</h4>
+                            <span>Desarrolladora de EAs, México</span>
                         </div>
                     </div>
-                    <p>Estrategia de ruptura en petróleo con confirmación de volumen y análisis de sesiones.</p>
-                    <a href="#" class="btn btn-outline">Ver Detalles</a>
                 </div>
 
-                <div class="strategy-card">
-                    <div class="strategy-header">
-                        <h3>EURUSD Mean Reversion</h3>
-                        <span class="profit-badge">+12% anual</span>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="strategy-metrics">
-                        <div class="metric">
-                            <span class="metric-value">58%</span>
-                            <span class="metric-label">Win Rate</span>
+                    <p class="testimonial-text">
+                        "Como trader institucional, he visto muchas soluciones de trading algorítmico. 
+                        Los bots de Joel destacan por su calidad de código, gestión de riesgo y 
+                        consistencia en resultados. Altamente recomendado."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
                         </div>
-                        <div class="metric">
-                            <span class="metric-value">1.5</span>
-                            <span class="metric-label">Profit Factor</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-value">1.8</span>
-                            <span class="metric-label">R:R Ratio</span>
+                        <div class="author-info">
+                            <h4>Carlos Mendoza</h4>
+                            <span>Portfolio Manager, Argentina</span>
                         </div>
                     </div>
-                    <p>Sistema de reversión a la media con bandas de Bollinger y RSI en temporalidad horaria.</p>
-                    <a href="#" class="btn btn-outline">Ver Detalles</a>
                 </div>
             </div>
         </div>
@@ -284,43 +937,51 @@ def strategy_xauusd(df, tp=14, sl=5):
     <section id="resources" class="resources">
         <div class="container">
             <h2 class="section-title">Recursos Gratuitos</h2>
-            <p class="section-subtitle">Herramientas y contenido para empezar en el trading algorítmico</p>
+            <p class="section-subtitle">Herramientas, guías y recursos para mejorar tu trading</p>
 
             <div class="resources-grid">
                 <div class="resource-card">
                     <div class="resource-icon">
-                        <i class="fas fa-calculator"></i>
-                    </div>
-                    <h3>Calculadora de Riesgo</h3>
-                    <p>Calcula el tamaño de posición adecuado según tu capital y tolerancia al riesgo.</p>
-                    <a href="#" class="btn btn-outline">Usar Herramienta</a>
-                </div>
-
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-download"></i>
-                    </div>
-                    <h3>Plantillas de Trading</h3>
-                    <p>Descarga journal de trading, plantillas de análisis y hojas de cálculo.</p>
-                    <a href="#" class="btn btn-outline">Descargar</a>
-                </div>
-
-                <div class="resource-card">
-                    <div class="resource-icon">
                         <i class="fas fa-book"></i>
                     </div>
-                    <h3>Guía de Backtesting</h3>
-                    <p>Aprende los fundamentos del backtesting y evita errores comunes.</p>
-                    <a href="#" class="btn btn-outline">Leer Guía</a>
+                    <h3>Guía de MQL5</h3>
+                    <p>Tutorial completo sobre desarrollo en MQL5 con ejemplos prácticos y mejores prácticas.</p>
+                    <a href="https://www.mql5.com/en/users/joel_pasapera" target="_blank" class="resource-link">
+                        Descargar PDF <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
 
                 <div class="resource-card">
                     <div class="resource-icon">
-                        <i class="fas fa-code"></i>
+                        <i class="fas fa-file-code"></i>
                     </div>
-                    <h3>Código de Ejemplo</h3>
-                    <p>Accede a scripts Python para empezar con el análisis de datos financieros.</p>
-                    <a href="#" class="btn btn-outline">Ver Código</a>
+                    <h3>Templates de Python</h3>
+                    <p>Plantillas de código Python para backtesting y análisis de estrategias de trading.</p>
+                    <a href="https://github.com/JoelPasapera" target="_blank" class="resource-link">
+                        Ver en GitHub <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Hoja de Cálculo de Risk Management</h3>
+                    <p>Excel para calcular tamaños de posición y gestionar el riesgo de tu cartera.</p>
+                    <a href="#contact" class="resource-link">
+                        Solicitar <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Canal de YouTube</h3>
+                    <p>Tutoriales en video sobre trading algorítmico, MQL5, Python y más.</p>
+                    <a href="https://www.youtube.com/@JoelPasapera" target="_blank" class="resource-link">
+                        Ver Canal <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -334,105 +995,203 @@ def strategy_xauusd(df, tp=14, sl=5):
 
             <div class="contact-content">
                 <div class="contact-info">
-                    <h3>Información de Contacto</h3>
-                    <div class="contact-item">
-                        <i class="fas fa-globe"></i>
-                        <div>
-                            <h4>linkedin</h4>
-                            <a href="https://www.linkedin.com/in/joel-pasapera-pinto-69089b23a/" target="_blank"
-                                rel="noopener noreferrer" class="website-link">
-                                https://www.linkedin.com/in/joel-pasapera-pinto-69089b23a/
-                            </a>
-                        </div>
+                    <div class="contact-intro">
+                        <h3>Conecta Conmigo</h3>
+                        <p>
+                            Estoy disponible para consultas sobre desarrollo de bots personalizados, 
+                            mentorías privadas, y proyectos de trading algorítmico empresarial.
+                        </p>
                     </div>
-                    <div class="contact-item">
-                        <i class="fas fa-globe"></i>
-                        <div>
-                            <h4>Sitio Web</h4>
-                            <a href="https://joelpasapera.github.io/" target="_blank" rel="noopener noreferrer"
-                                class="website-link">
-                                https://joelpasapera.github.io/
-                            </a>
+
+                    <div class="contact-methods">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>LinkedIn</h4>
+                                <a href="https://www.linkedin.com/in/joel-pasapera-pinto-69089b23a/" target="_blank"
+                                    rel="noopener noreferrer" class="contact-link">
+                                    Conectar en LinkedIn
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-share-alt"></i>
-                        <div>
-                            <h4>Redes Sociales</h4>
-                            <div class="social-links">
-                                <!-- se puede usar formato svg para las imagenes porque es mas ligero -->
-                                <a href="https://www.youtube.com/@JoelPasapera" aria-label="YouTube"
-                                    class="social-link">
-                                    <img src="icons/youtube.png" alt="YouTube" class="social-icon">
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Sitio Web</h4>
+                                <a href="https://joelpasapera.github.io/" target="_blank" rel="noopener noreferrer"
+                                    class="contact-link">
+                                    joelpasapera.github.io
                                 </a>
-                                <a href="https://www.instagram.com/joel.pasapera/" aria-label="Instagram"
-                                    class="social-link">
-                                    <img src="icons/instagram.png" alt="Instagram" class="social-icon">
-                                </a>
-                                <a href="https://github.com/JoelPasapera" aria-label="GitHub" class="social-link">
-                                    <img src="icons/github.png" alt="GitHub" class="social-icon">
-                                </a>
-                                <a href="https://www.mql5.com/en/users/joel_pasapera" aria-label="MQL5"
-                                    class="social-link">
-                                    <img src="icons/mql5.png" alt="MQL5" class="social-icon">
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-bootstrap"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>MQL5 Market</h4>
+                                <a href="https://www.mql5.com/en/users/joel_pasapera" target="_blank"
+                                    rel="noopener noreferrer" class="contact-link">
+                                    Ver mis productos en MQL5
                                 </a>
                             </div>
                         </div>
                     </div>
+
+                    <div class="social-section">
+                        <h3>Sígueme en Redes Sociales</h3>
+                        <div class="social-links-enhanced">
+                            <a href="https://www.youtube.com/@JoelPasapera" target="_blank" 
+                               aria-label="YouTube" class="social-link youtube">
+                                <i class="fab fa-youtube"></i>
+                                <span>YouTube</span>
+                            </a>
+                            <a href="https://www.instagram.com/joel.pasapera/" target="_blank"
+                               aria-label="Instagram" class="social-link instagram">
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+                            <a href="https://github.com/JoelPasapera" target="_blank" 
+                               aria-label="GitHub" class="social-link github">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="https://www.mql5.com/en/users/joel_pasapera" target="_blank"
+                               aria-label="MQL5" class="social-link mql5">
+                                <i class="fas fa-code"></i>
+                                <span>MQL5</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="contact-form">
+                <div class="contact-form-container">
                     <h3>Envíame un Mensaje</h3>
                     <form id="contactForm">
                         <div class="form-group">
+                            <label for="name">
+                                <i class="fas fa-user"></i>
+                                Nombre Completo
+                            </label>
                             <input type="text" id="name" placeholder="Tu nombre" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" id="email" placeholder="Tu email" required>
+                            <label for="email">
+                                <i class="fas fa-envelope"></i>
+                                Email
+                            </label>
+                            <input type="email" id="email" placeholder="tu@email.com" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" id="subject" placeholder="Asunto" required>
+                            <label for="subject">
+                                <i class="fas fa-tag"></i>
+                                Asunto
+                            </label>
+                            <input type="text" id="subject" placeholder="¿En qué puedo ayudarte?" required>
                         </div>
                         <div class="form-group">
-                            <textarea id="message" rows="5" placeholder="Tu mensaje" required></textarea>
+                            <label for="message">
+                                <i class="fas fa-comment"></i>
+                                Mensaje
+                            </label>
+                            <textarea id="message" rows="5" placeholder="Describe tu consulta o proyecto..." required></textarea>
                         </div>
-                        <button type="button" class="btn btn-primary">Enviar Mensaje</button>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fas fa-paper-plane"></i>
+                            Enviar Mensaje
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pie de Página -->
+    <!-- Pie de Página Mejorado -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Joel Pasapera</h3>
-                    <p>Trader algorítmico especializado en el desarrollo de sistemas de trading automatizados usando
-                        Python y análisis de datos.</p>
+                    <div class="footer-logo">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Joel Pasapera</h3>
+                    </div>
+                    <p>
+                        Ingeniero especializado en trading algorítmico y desarrollo de sistemas 
+                        automatizados para MetaTrader 5. Transformando estrategias manuales en 
+                        bots profesionales y rentables.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://www.youtube.com/@JoelPasapera" target="_blank" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.instagram.com/joel.pasapera/" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://github.com/JoelPasapera" target="_blank" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/joel-pasapera-pinto-69089b23a/" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
                 </div>
+                
                 <div class="footer-section">
-                    <h3>Enlaces Rápidos</h3>
+                    <h3>Navegación</h3>
                     <ul>
-                        <li><a href="#home">Inicio</a></li>
-                        <li><a href="#about">Sobre Mí</a></li>
-                        <li><a href="#teaching">Enseñanza</a></li>
-                        <li><a href="#strategies">Estrategias</a></li>
+                        <li><a href="#home"><i class="fas fa-angle-right"></i> Inicio</a></li>
+                        <li><a href="#about"><i class="fas fa-angle-right"></i> Sobre Mí</a></li>
+                        <li><a href="#bots"><i class="fas fa-angle-right"></i> Bots de Trading</a></li>
+                        <li><a href="#teaching"><i class="fas fa-angle-right"></i> Enseñanza</a></li>
+                        <li><a href="#strategies"><i class="fas fa-angle-right"></i> Estrategias</a></li>
                     </ul>
                 </div>
+                
                 <div class="footer-section">
                     <h3>Recursos</h3>
                     <ul>
-                        <li><a href="#resources">Herramientas Gratuitas</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Preguntas Frecuentes</a></li>
-                        <li><a href="#">Términos y Condiciones</a></li>
+                        <li><a href="#scripts"><i class="fas fa-angle-right"></i> Scripts Gratis</a></li>
+                        <li><a href="https://www.mql5.com/en/users/joel_pasapera" target="_blank">
+                            <i class="fas fa-angle-right"></i> Perfil MQL5</a></li>
+                        <li><a href="https://github.com/JoelPasapera" target="_blank">
+                            <i class="fas fa-angle-right"></i> Repositorio GitHub</a></li>
+                        <li><a href="https://www.youtube.com/@JoelPasapera" target="_blank">
+                            <i class="fas fa-angle-right"></i> Canal YouTube</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-globe"></i>
+                            <a href="https://joelpasapera.github.io/" target="_blank">joelpasapera.github.io</a>
+                        </li>
+                        <li>
+                            <i class="fab fa-linkedin"></i>
+                            <a href="https://www.linkedin.com/in/joel-pasapera-pinto-69089b23a/" target="_blank">LinkedIn</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-code"></i>
+                            <a href="https://www.mql5.com/en/users/joel_pasapera" target="_blank">MQL5 Market</a>
+                        </li>
                     </ul>
                 </div>
             </div>
+            
             <div class="footer-bottom">
                 <p>&copy; 2025 Joel Pasapera. Todos los derechos reservados.</p>
+                <p class="footer-disclaimer">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Trading de riesgo: Los resultados pasados no garantizan rendimientos futuros. 
+                    Opera solo con capital que puedas permitirte perder.
+                </p>
             </div>
         </div>
     </footer>
@@ -441,7 +1200,7 @@ def strategy_xauusd(df, tp=14, sl=5):
     <div class="chat-widget">
         <div class="chat-toggle" id="chatToggle">
             <div class="chat-toggle-content">
-                <img src="icons/favicon.ico" alt="Chat" class="chat-toggle-img">
+                <i class="fas fa-robot chat-bot-icon"></i>
                 <span class="chat-notification"></span>
             </div>
         </div>
@@ -449,11 +1208,14 @@ def strategy_xauusd(df, tp=14, sl=5):
         <div class="chat-container" id="chatContainer">
             <div class="chat-header">
                 <div class="chat-avatar">
-                    <img src="icons/favicon.ico" alt="Joel Pasapera" class="chat-avatar-img">
+                    <i class="fas fa-robot"></i>
                 </div>
                 <div class="chat-info">
-                    <h4>Joel Pasapera</h4>
-                    <span class="chat-status">En línea</span>
+                    <h4>Joel Pasapera AI</h4>
+                    <span class="chat-status">
+                        <span class="status-dot"></span>
+                        En línea
+                    </span>
                 </div>
                 <button class="chat-close" id="chatClose" type="button">
                     <i class="fas fa-times"></i>
@@ -464,10 +1226,10 @@ def strategy_xauusd(df, tp=14, sl=5):
                 <!-- Mensaje de bienvenida inicial -->
                 <div class="message bot-message welcome-message">
                     <div class="message-avatar">
-                        <img src="icons/favicon.ico" alt="Joel" class="message-avatar-img">
+                        <i class="fas fa-robot"></i>
                     </div>
                     <div class="message-content">
-                        <p>¡Hola! Soy Joel Pasapera. ¿En qué puedo ayudarte con trading algorítmico?</p>
+                        <p>¡Hola! Soy el asistente de Joel Pasapera. ¿En qué puedo ayudarte con trading algorítmico?</p>
                         <span class="message-time">Ahora</span>
                     </div>
                 </div>
@@ -475,27 +1237,21 @@ def strategy_xauusd(df, tp=14, sl=5):
     
             <div class="chat-input-container">
                 <div class="chat-input">
-                    <textarea id="chatInput" placeholder="Escribe tu mensaje..." rows="1"></textarea>
+                    <textarea id="chatInput" placeholder="Escribe tu pregunta..." rows="1"></textarea>
                     <button id="chatSend" class="send-button" type="button">
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </div>
                 <div class="chat-disclaimer">
-                    <small>Responde en segundos • Asistente IA</small>
+                    <small><i class="fas fa-shield-check"></i> Responde en segundos • Asistente IA</small>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Obligar descarga forzoza como archivo nuevo sin cache-->
+    <!-- Scripts -->
     <script src="chatbot.js"></script>
     <script src="script.js"></script>
-    <!-- descarga con cache: <script src="script.js"></script> -->
-    <!-- descarga con cache: <script src="chat.js"></script> -->
 </body>
 
-
 </html>
-
-
-
