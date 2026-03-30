@@ -1,0 +1,150 @@
+<!--
+    GENERADOR DE EXPERT ADVISORS (EA) — HTML
+    Joel Pasapera - Trading Algorítmico
+    
+    INTEGRACIÓN:
+    1. CSS en <head>: <link rel="stylesheet" href="ea-generator.css">
+    2. Pegar <div id="ea-generator-root"></div> en index.html
+    3. JS al final: <script src="ea-generator.js"></script>
+-->
+
+<section id="ea-generator" class="ea-gen">
+    <div class="ea-gen__bg-grid"></div>
+    <div class="ea-gen__container">
+
+        <!-- Header -->
+        <header class="ea-gen__header">
+            <div class="ea-gen__pill">
+                <span class="ea-gen__pill-dot"></span>
+                INTELIGENCIA ARTIFICIAL
+            </div>
+            <h2 class="ea-gen__title">
+                Generador de <span class="ea-gen__title-accent">Expert Advisors</span>
+            </h2>
+            <p class="ea-gen__desc">
+                Describe en lenguaje natural el bot que necesitas y nuestra IA generará 
+                el código MQL5 listo para MetaTrader 5 — descárgalo al instante.
+            </p>
+        </header>
+
+        <!-- Cuerpo: Input + Output -->
+        <div class="ea-gen__body">
+
+            <!-- Panel de Entrada -->
+            <div class="ea-gen__input-panel">
+                <div class="ea-gen__input-header">
+                    <div class="ea-gen__input-icon">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <div>
+                        <div class="ea-gen__input-title">Describe tu Bot</div>
+                        <div class="ea-gen__input-subtitle">Escribe en español o inglés lo que necesitas</div>
+                    </div>
+                </div>
+                <div class="ea-gen__input-body">
+                    <textarea 
+                        id="eaPromptInput" 
+                        class="ea-gen__textarea" 
+                        placeholder="Ejemplo: Crea un EA que opere en XAUUSD en temporalidad M5. Que use cruce de medias móviles EMA 9 y EMA 21 para entrar. Stop loss de 200 puntos y take profit de 400 puntos. Lotaje fijo de 0.01..."
+                        rows="8"
+                    ></textarea>
+
+                    <!-- Sugerencias rápidas -->
+                    <div class="ea-gen__suggestions" id="eaSuggestions">
+                        <button class="ea-gen__suggestion" data-prompt="Crea un EA de scalping en XAUUSD con RSI y medias móviles, SL 150 puntos, TP 300 puntos, lote 0.01">
+                            <i class="fas fa-bolt"></i> Scalping XAUUSD
+                        </button>
+                        <button class="ea-gen__suggestion" data-prompt="Crea un EA de breakout para el par EUR/USD en H1 que detecte rupturas del rango asiático con gestión de riesgo del 1% por operación">
+                            <i class="fas fa-rocket"></i> Breakout EUR/USD
+                        </button>
+                        <button class="ea-gen__suggestion" data-prompt="Crea un EA que opere en US30 usando cruce de MACD con señal, que incluya trailing stop de 100 puntos y filtro de sesión de Nueva York">
+                            <i class="fas fa-chart-line"></i> MACD US30
+                        </button>
+                        <button class="ea-gen__suggestion" data-prompt="Crea un EA para WTI petróleo que use Bandas de Bollinger y RSI como filtro, con SL dinámico basado en ATR y TP ratio 1:2">
+                            <i class="fas fa-oil-can"></i> Bollinger WTI
+                        </button>
+                    </div>
+
+                    <div class="ea-gen__submit-row">
+                        <button class="ea-gen__submit-btn" id="eaSubmitBtn">
+                            <i class="fas fa-cogs"></i>
+                            Generar Expert Advisor
+                        </button>
+                        <span class="ea-gen__submit-hint">Generación en ~15-30 segundos</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel de Salida -->
+            <div class="ea-gen__output-panel" id="eaOutputPanel">
+                <!-- Toolbar tipo IDE -->
+                <div class="ea-gen__output-toolbar">
+                    <div class="ea-gen__output-dots">
+                        <span class="ea-gen__dot ea-gen__dot--red"></span>
+                        <span class="ea-gen__dot ea-gen__dot--yellow"></span>
+                        <span class="ea-gen__dot ea-gen__dot--green"></span>
+                    </div>
+                    <div class="ea-gen__output-filename" id="eaFilename">
+                        <i class="fas fa-file-code"></i>
+                        <span>GeneratedEA.mq5</span>
+                    </div>
+                    <div class="ea-gen__output-actions" id="eaActions" style="display:none;">
+                        <button class="ea-gen__action-btn" id="eaCopyBtn" title="Copiar código">
+                            <i class="fas fa-copy"></i> Copiar
+                        </button>
+                        <button class="ea-gen__action-btn ea-gen__action-btn--download" id="eaDownloadBtn" title="Descargar .mq5">
+                            <i class="fas fa-download"></i> Descargar .mq5
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Contenido dinámico -->
+                <div class="ea-gen__code-area" id="eaCodeArea">
+                    <div class="ea-gen__empty-state">
+                        <div class="ea-gen__empty-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="ea-gen__empty-title">Tu código aparecerá aquí</div>
+                        <div class="ea-gen__empty-desc">
+                            Describe el bot que necesitas en el panel izquierdo 
+                            y presiona "Generar Expert Advisor"
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status bar -->
+                <div class="ea-gen__output-status">
+                    <div class="ea-gen__status-left">
+                        <span class="ea-gen__status-dot" id="eaStatusDot"></span>
+                        <span id="eaStatusText">Esperando solicitud…</span>
+                    </div>
+                    <span id="eaLineCount">MQL5 · MetaTrader 5</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="ea-gen__features">
+            <div class="ea-gen__feature">
+                <div class="ea-gen__feature-icon"><i class="fas fa-brain"></i></div>
+                <div class="ea-gen__feature-title">IA Avanzada</div>
+                <div class="ea-gen__feature-desc">Modelo entrenado con documentación MQL5 oficial</div>
+            </div>
+            <div class="ea-gen__feature">
+                <div class="ea-gen__feature-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="ea-gen__feature-title">Risk Management</div>
+                <div class="ea-gen__feature-desc">Incluye gestión de riesgo y validación de órdenes</div>
+            </div>
+            <div class="ea-gen__feature">
+                <div class="ea-gen__feature-icon"><i class="fas fa-download"></i></div>
+                <div class="ea-gen__feature-title">Descarga Directa</div>
+                <div class="ea-gen__feature-desc">Archivo .mq5 listo para compilar en MetaEditor</div>
+            </div>
+            <div class="ea-gen__feature">
+                <div class="ea-gen__feature-icon"><i class="fas fa-code"></i></div>
+                <div class="ea-gen__feature-title">Código Comentado</div>
+                <div class="ea-gen__feature-desc">Cada línea explicada para que aprendas MQL5</div>
+            </div>
+        </div>
+    </div>
+</section>
