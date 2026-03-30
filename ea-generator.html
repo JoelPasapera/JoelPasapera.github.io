@@ -42,25 +42,50 @@
                     </div>
                 </div>
                 <div class="ea-gen__input-body">
-                    <textarea 
-                        id="eaPromptInput" 
-                        class="ea-gen__textarea" 
-                        placeholder="Ejemplo: Crea un EA que opere en XAUUSD en temporalidad M5. Que use cruce de medias móviles EMA 9 y EMA 21 para entrar. Stop loss de 200 puntos y take profit de 400 puntos. Lotaje fijo de 0.01..."
-                        rows="8"
-                    ></textarea>
+
+                    <!-- Campo: Nombre del EA -->
+                    <div class="ea-gen__name-group">
+                        <label class="ea-gen__name-label">
+                            <i class="fas fa-tag"></i> Nombre del EA
+                        </label>
+                        <input 
+                            type="text" 
+                            id="eaNameInput" 
+                            class="ea-gen__name-input" 
+                            placeholder="Ej: GoldScalper_v1, BreakoutATR_H1..."
+                            maxlength="60"
+                            autocomplete="off"
+                        >
+                    </div>
+
+                    <!-- Campo: Descripción / Prompt -->
+                    <div>
+                        <label class="ea-gen__prompt-label">
+                            <i class="fas fa-comment-alt"></i> Descripción del bot
+                        </label>
+                        <textarea 
+                            id="eaPromptInput" 
+                            class="ea-gen__textarea" 
+                            placeholder="Ejemplo: Crea un EA que opere en XAUUSD en temporalidad M5. Que use cruce de medias móviles EMA 9 y EMA 21 para entrar. Stop loss de 200 puntos y take profit de 400 puntos. Lotaje fijo de 0.01..."
+                            rows="7"
+                            maxlength="5000"
+                        ></textarea>
+                        <div class="ea-gen__char-count" id="eaCharCount">0 / 5000</div>
+                    </div>
 
                     <!-- Sugerencias rápidas -->
+                    <div class="ea-gen__suggestions-label">Plantillas rápidas</div>
                     <div class="ea-gen__suggestions" id="eaSuggestions">
-                        <button class="ea-gen__suggestion" data-prompt="Crea un EA de scalping en XAUUSD con RSI y medias móviles, SL 150 puntos, TP 300 puntos, lote 0.01">
+                        <button class="ea-gen__suggestion" data-name="ScalpingXAU_RSI" data-prompt="Crea un EA de scalping en XAUUSD con RSI y medias móviles EMA, SL 150 puntos, TP 300 puntos, lote 0.01">
                             <i class="fas fa-bolt"></i> Scalping XAUUSD
                         </button>
-                        <button class="ea-gen__suggestion" data-prompt="Crea un EA de breakout para el par EUR/USD en H1 que detecte rupturas del rango asiático con gestión de riesgo del 1% por operación">
+                        <button class="ea-gen__suggestion" data-name="BreakoutEURUSD_Asian" data-prompt="Crea un EA de breakout para el par EUR/USD en H1 que detecte rupturas del rango asiático con gestión de riesgo del 1% por operación">
                             <i class="fas fa-rocket"></i> Breakout EUR/USD
                         </button>
-                        <button class="ea-gen__suggestion" data-prompt="Crea un EA que opere en US30 usando cruce de MACD con señal, que incluya trailing stop de 100 puntos y filtro de sesión de Nueva York">
+                        <button class="ea-gen__suggestion" data-name="MACD_US30_NY" data-prompt="Crea un EA que opere en US30 usando cruce de MACD con señal, que incluya trailing stop de 100 puntos y filtro de sesión de Nueva York">
                             <i class="fas fa-chart-line"></i> MACD US30
                         </button>
-                        <button class="ea-gen__suggestion" data-prompt="Crea un EA para WTI petróleo que use Bandas de Bollinger y RSI como filtro, con SL dinámico basado en ATR y TP ratio 1:2">
+                        <button class="ea-gen__suggestion" data-name="BollingerWTI_ATR" data-prompt="Crea un EA para WTI petróleo que use Bandas de Bollinger y RSI como filtro, con SL dinámico basado en ATR y TP ratio 1:2">
                             <i class="fas fa-oil-can"></i> Bollinger WTI
                         </button>
                     </div>
@@ -70,7 +95,7 @@
                             <i class="fas fa-cogs"></i>
                             Generar Expert Advisor
                         </button>
-                        <span class="ea-gen__submit-hint">Generación en ~15-30 segundos</span>
+                        <span class="ea-gen__submit-hint">Ctrl+Enter para enviar · ~15-30s</span>
                     </div>
                 </div>
             </div>
