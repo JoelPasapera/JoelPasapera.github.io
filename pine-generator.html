@@ -1,0 +1,171 @@
+<!--
+    GENERADOR DE ESTRATEGIAS PINE SCRIPT v6 — HTML
+    Joel Pasapera - Trading Algorítmico
+-->
+
+<section id="pine-generator" class="pine-gen">
+    <div class="pine-gen__bg-grid"></div>
+    <div class="pine-gen__container">
+
+        <header class="pine-gen__header">
+            <div class="pine-gen__pill">
+                <span class="pine-gen__pill-dot"></span>
+                TRADINGVIEW
+            </div>
+            <h2 class="pine-gen__title">
+                Generador de <span class="pine-gen__title-accent">Pine Script v6</span>
+            </h2>
+            <p class="pine-gen__desc">
+                Crea estrategias e indicadores para TradingView con IA. 
+                Describe lo que necesitas y obtén código Pine Script listo para usar.
+            </p>
+        </header>
+
+        <div class="pine-gen__body">
+
+            <!-- Input Panel -->
+            <div class="pine-gen__input-panel">
+                <div class="pine-gen__input-header">
+                    <div class="pine-gen__input-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <div>
+                        <div class="pine-gen__input-title">Diseña tu Estrategia</div>
+                        <div class="pine-gen__input-subtitle">Pine Script v6 para TradingView</div>
+                    </div>
+                </div>
+                <div class="pine-gen__input-body">
+
+                    <!-- Tipo: Strategy vs Indicator -->
+                    <div class="pine-gen__type-group">
+                        <label class="pine-gen__type-label">
+                            <i class="fas fa-layer-group"></i> Tipo de script
+                        </label>
+                        <div class="pine-gen__type-row">
+                            <button class="pine-gen__type-btn active" data-type="strategy" id="pineTypeStrategy">
+                                <i class="fas fa-chess-knight"></i> Strategy
+                            </button>
+                            <button class="pine-gen__type-btn" data-type="indicator" id="pineTypeIndicator">
+                                <i class="fas fa-chart-area"></i> Indicator
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Nombre -->
+                    <div class="pine-gen__name-group">
+                        <label class="pine-gen__name-label">
+                            <i class="fas fa-tag"></i> Nombre del script
+                        </label>
+                        <input type="text" id="pineNameInput" class="pine-gen__name-input"
+                               placeholder="Ej: RSI_Divergence_Strategy, BollingerBreakout..."
+                               maxlength="60" autocomplete="off">
+                    </div>
+
+                    <!-- Prompt -->
+                    <div>
+                        <label class="pine-gen__prompt-label">
+                            <i class="fas fa-comment-alt"></i> Descripción
+                        </label>
+                        <textarea id="pinePromptInput" class="pine-gen__textarea"
+                                  placeholder="Ejemplo: Crea una estrategia que use cruce de EMA 9 y EMA 21 para entrar en largo/corto. Stop loss basado en ATR con multiplicador 1.5. Take profit ratio 1:2. Que muestre las zonas de entrada en el gráfico con labels..."
+                                  rows="6" maxlength="5000"></textarea>
+                        <div class="pine-gen__char-count" id="pineCharCount">0 / 5000</div>
+                    </div>
+
+                    <!-- Sugerencias -->
+                    <div class="pine-gen__suggestions-label">Plantillas rápidas</div>
+                    <div class="pine-gen__suggestions" id="pineSuggestions">
+                        <button class="pine-gen__suggestion" data-name="EMA_Cross_Strategy" data-type="strategy"
+                                data-prompt="Estrategia de cruce de EMA 9 y EMA 21. Entrada long cuando EMA rápida cruza sobre la lenta, short al revés. Stop loss con ATR(14)*1.5, take profit ratio 1:2. Mostrar señales con plotshape.">
+                            <i class="fas fa-bolt"></i> EMA Cross
+                        </button>
+                        <button class="pine-gen__suggestion" data-name="RSI_Overbought_Oversold" data-type="strategy"
+                                data-prompt="Estrategia RSI: comprar cuando RSI(14) baja de 30 y vender cuando sube de 70. Stop loss fijo de 2% y take profit de 4%. Incluir filtro de tendencia con SMA 200.">
+                            <i class="fas fa-tachometer-alt"></i> RSI Strategy
+                        </button>
+                        <button class="pine-gen__suggestion" data-name="MACD_Histogram_Signal" data-type="indicator"
+                                data-prompt="Indicador que muestre MACD con histograma coloreado (verde cuando sube, rojo cuando baja), línea de señal, y alertas cuando el histograma cambia de dirección. Incluir divergencias.">
+                            <i class="fas fa-chart-bar"></i> MACD Indicator
+                        </button>
+                        <button class="pine-gen__suggestion" data-name="Supertrend_ATR_Strategy" data-type="strategy"
+                                data-prompt="Estrategia basada en Supertrend con ATR period 10 y factor 3. Entrada long cuando el precio cruza por encima del Supertrend, short al revés. Trailing stop con ATR. Colorear el fondo según la tendencia.">
+                            <i class="fas fa-arrow-trend-up"></i> Supertrend
+                        </button>
+                    </div>
+
+                    <div class="pine-gen__submit-row">
+                        <button class="pine-gen__submit-btn" id="pineSubmitBtn">
+                            <i class="fas fa-code"></i>
+                            Generar Pine Script
+                        </button>
+                        <span class="pine-gen__submit-hint">Ctrl+Enter · ~15-30s</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Output Panel -->
+            <div class="pine-gen__output-panel" id="pineOutputPanel">
+                <div class="pine-gen__output-toolbar">
+                    <div class="pine-gen__output-dots">
+                        <span class="pine-gen__dot pine-gen__dot--red"></span>
+                        <span class="pine-gen__dot pine-gen__dot--yellow"></span>
+                        <span class="pine-gen__dot pine-gen__dot--green"></span>
+                    </div>
+                    <div class="pine-gen__output-filename" id="pineFilename">
+                        <i class="fas fa-tree"></i>
+                        <span>script.pine</span>
+                    </div>
+                    <div class="pine-gen__output-actions" id="pineActions" style="display:none;">
+                        <button class="pine-gen__action-btn" id="pineCopyBtn"><i class="fas fa-copy"></i> Copiar</button>
+                        <button class="pine-gen__action-btn pine-gen__action-btn--download" id="pineDownloadBtn">
+                            <i class="fas fa-download"></i> Descargar .pine
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pine-gen__code-area" id="pineCodeArea">
+                    <div class="pine-gen__empty-state">
+                        <div class="pine-gen__empty-icon"><i class="fas fa-tree"></i></div>
+                        <div class="pine-gen__empty-title">Tu código Pine Script aparecerá aquí</div>
+                        <div class="pine-gen__empty-desc">
+                            Describe la estrategia o indicador que necesitas 
+                            y presiona "Generar Pine Script"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pine-gen__output-status">
+                    <div class="pine-gen__status-left">
+                        <span class="pine-gen__status-dot" id="pineStatusDot"></span>
+                        <span id="pineStatusText">Esperando solicitud…</span>
+                    </div>
+                    <span id="pineLineCount">Pine Script v6 · TradingView</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="pine-gen__features">
+            <div class="pine-gen__feature">
+                <div class="pine-gen__feature-icon"><i class="fas fa-tree"></i></div>
+                <div class="pine-gen__feature-title">Pine Script v6</div>
+                <div class="pine-gen__feature-desc">Última versión con todas las funciones disponibles</div>
+            </div>
+            <div class="pine-gen__feature">
+                <div class="pine-gen__feature-icon"><i class="fas fa-chess-knight"></i></div>
+                <div class="pine-gen__feature-title">Strategy & Indicator</div>
+                <div class="pine-gen__feature-desc">Genera estrategias con backtesting o indicadores visuales</div>
+            </div>
+            <div class="pine-gen__feature">
+                <div class="pine-gen__feature-icon"><i class="fas fa-palette"></i></div>
+                <div class="pine-gen__feature-title">Visuales Pro</div>
+                <div class="pine-gen__feature-desc">Labels, plots, colores y alertas incluidos</div>
+            </div>
+            <div class="pine-gen__feature">
+                <div class="pine-gen__feature-icon"><i class="fas fa-bell"></i></div>
+                <div class="pine-gen__feature-title">Alertas Listas</div>
+                <div class="pine-gen__feature-desc">Alertcondition integrado para notificaciones</div>
+            </div>
+        </div>
+    </div>
+</section>

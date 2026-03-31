@@ -1,0 +1,400 @@
+/*
+ * GENERADOR DE ESTRATEGIAS PINE SCRIPT v6 — CSS
+ * Joel Pasapera · Trading Algorítmico
+ * Prefijo .pine-gen__
+ */
+
+.pine-gen {
+    position: relative;
+    padding: 100px 0 80px;
+    background: #0a0e1a;
+    overflow: hidden;
+    color: #e2e8f0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.pine-gen__bg-grid {
+    position: absolute; inset: 0;
+    background-image:
+        linear-gradient(rgba(245,158,11,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,158,11,.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+}
+
+.pine-gen::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+        radial-gradient(ellipse 55% 45% at 25% 25%, rgba(245,158,11,.10), transparent),
+        radial-gradient(ellipse 50% 40% at 75% 80%, rgba(59,130,246,.06), transparent);
+    pointer-events: none;
+}
+
+.pine-gen__container {
+    position: relative; z-index: 1;
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+}
+
+/* HEADER */
+.pine-gen__header { text-align: center; margin-bottom: 48px; }
+
+.pine-gen__pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 7px 22px; border-radius: 50px;
+    background: rgba(245,158,11,.15); border: 1px solid rgba(245,158,11,.35);
+    color: #fbbf24; font-weight: 700; font-size: .8rem;
+    letter-spacing: 1.2px; text-transform: uppercase;
+    margin-bottom: 20px; backdrop-filter: blur(8px);
+}
+
+.pine-gen__pill-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: #f59e0b;
+    box-shadow: 0 0 8px #f59e0b, 0 0 20px rgba(245,158,11,.4);
+    animation: pine-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes pine-pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50%     { opacity: .45; transform: scale(1.35); }
+}
+
+.pine-gen__title {
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 800; color: #fff;
+    margin-bottom: 14px; letter-spacing: -.02em;
+}
+
+.pine-gen__title-accent {
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.pine-gen__desc {
+    font-size: 1.1rem; color: rgba(255,255,255,.55);
+    max-width: 680px; margin: 0 auto; line-height: 1.6;
+}
+
+/* LAYOUT */
+.pine-gen__body {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 32px; align-items: start;
+}
+
+/* INPUT PANEL */
+.pine-gen__input-panel {
+    background: rgba(15,23,42,.65);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 16px; overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.pine-gen__input-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    background: rgba(255,255,255,.02);
+}
+
+.pine-gen__input-icon {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 1.2rem; flex-shrink: 0;
+}
+
+.pine-gen__input-title { font-size: 1.1rem; font-weight: 700; color: #fff; }
+.pine-gen__input-subtitle { font-size: .82rem; color: rgba(255,255,255,.4); margin-top: 2px; }
+
+.pine-gen__input-body { padding: 24px; }
+
+/* Tipo selector */
+.pine-gen__type-group { margin-bottom: 16px; }
+
+.pine-gen__type-label {
+    display: flex; align-items: center; gap: 7px;
+    font-size: .85rem; font-weight: 600;
+    color: rgba(255,255,255,.6); margin-bottom: 8px;
+}
+.pine-gen__type-label i { color: #f59e0b; font-size: .8rem; }
+
+.pine-gen__type-row {
+    display: flex; gap: 8px;
+}
+
+.pine-gen__type-btn {
+    flex: 1; padding: 10px 14px;
+    border: 1px solid rgba(255,255,255,.1); border-radius: 8px;
+    background: rgba(255,255,255,.04); color: rgba(255,255,255,.6);
+    font-weight: 600; font-size: .85rem; cursor: pointer;
+    transition: all .25s ease; font-family: inherit; text-align: center;
+}
+
+.pine-gen__type-btn:hover {
+    background: rgba(245,158,11,.1); border-color: rgba(245,158,11,.3);
+    color: #fff;
+}
+
+.pine-gen__type-btn.active {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    border-color: transparent; color: #fff;
+    box-shadow: 0 0 14px rgba(245,158,11,.3);
+}
+
+/* Name input */
+.pine-gen__name-group { margin-bottom: 16px; }
+
+.pine-gen__name-label {
+    display: flex; align-items: center; gap: 7px;
+    font-size: .85rem; font-weight: 600;
+    color: rgba(255,255,255,.6); margin-bottom: 8px;
+}
+.pine-gen__name-label i { color: #f59e0b; font-size: .8rem; }
+
+.pine-gen__name-input {
+    width: 100%; padding: 12px 16px;
+    background: rgba(0,0,0,.25); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 10px; color: #e2e8f0;
+    font-family: 'Fira Code', monospace; font-size: .92rem;
+    transition: border-color .25s ease, box-shadow .25s ease; outline: none;
+}
+.pine-gen__name-input::placeholder { color: rgba(255,255,255,.2); font-family: 'Inter', sans-serif; }
+.pine-gen__name-input:focus { border-color: rgba(245,158,11,.5); box-shadow: 0 0 0 3px rgba(245,158,11,.1); }
+
+/* Textarea */
+.pine-gen__prompt-label {
+    display: flex; align-items: center; gap: 7px;
+    font-size: .85rem; font-weight: 600;
+    color: rgba(255,255,255,.6); margin-bottom: 8px;
+}
+.pine-gen__prompt-label i { color: #3b82f6; font-size: .8rem; }
+
+.pine-gen__textarea {
+    width: 100%; min-height: 160px; max-height: 400px;
+    padding: 16px; background: rgba(0,0,0,.25);
+    border: 1px solid rgba(255,255,255,.1); border-radius: 12px;
+    color: #e2e8f0; font-family: 'Inter', sans-serif;
+    font-size: .92rem; line-height: 1.7;
+    resize: vertical; outline: none;
+    transition: border-color .25s ease, box-shadow .25s ease;
+}
+.pine-gen__textarea::placeholder { color: rgba(255,255,255,.22); }
+.pine-gen__textarea:focus { border-color: rgba(245,158,11,.5); box-shadow: 0 0 0 3px rgba(245,158,11,.1); }
+
+.pine-gen__char-count { text-align: right; font-size: .75rem; color: rgba(255,255,255,.25); margin-top: 6px; }
+
+/* Suggestions */
+.pine-gen__suggestions-label {
+    font-size: .8rem; font-weight: 600; color: rgba(255,255,255,.35);
+    margin: 18px 0 10px; text-transform: uppercase; letter-spacing: .5px;
+}
+
+.pine-gen__suggestions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+
+.pine-gen__suggestion {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 14px; border: 1px solid rgba(255,255,255,.1);
+    border-radius: 8px; background: rgba(255,255,255,.04);
+    color: rgba(255,255,255,.6); font-weight: 500; font-size: .82rem;
+    cursor: pointer; transition: all .25s ease; font-family: inherit;
+}
+.pine-gen__suggestion:hover {
+    background: rgba(245,158,11,.15); border-color: rgba(245,158,11,.4);
+    color: #fff; transform: translateY(-1px);
+}
+.pine-gen__suggestion i { font-size: .75rem; color: #f59e0b; }
+
+/* Submit */
+.pine-gen__submit-row { display: flex; align-items: center; gap: 14px; }
+
+.pine-gen__submit-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    border: none; border-radius: 10px; color: #fff;
+    font-size: 1rem; font-weight: 700; cursor: pointer;
+    transition: transform .25s ease, box-shadow .25s ease;
+    font-family: inherit; flex-shrink: 0;
+}
+.pine-gen__submit-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 0 22px rgba(245,158,11,.35); }
+.pine-gen__submit-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.pine-gen__submit-hint { font-size: .8rem; color: rgba(255,255,255,.3); }
+
+/* OUTPUT PANEL — same structure as EA gen */
+.pine-gen__output-panel {
+    background: rgba(15,23,42,.65);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 16px; overflow: hidden;
+    backdrop-filter: blur(10px);
+    display: flex; flex-direction: column;
+    height: 620px;
+}
+
+.pine-gen__output-toolbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 18px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    background: rgba(255,255,255,.02); flex-shrink: 0;
+}
+
+.pine-gen__output-dots { display: flex; gap: 7px; }
+.pine-gen__dot { width: 11px; height: 11px; border-radius: 50%; }
+.pine-gen__dot--red    { background: #ef4444; }
+.pine-gen__dot--yellow { background: #f59e0b; }
+.pine-gen__dot--green  { background: #10b981; }
+
+.pine-gen__output-filename {
+    display: flex; align-items: center; gap: 7px;
+    font-family: 'Fira Code', monospace; font-size: .82rem;
+    color: rgba(255,255,255,.45);
+}
+.pine-gen__output-filename i { color: #f59e0b; }
+
+.pine-gen__output-actions { display: flex; gap: 8px; }
+
+.pine-gen__action-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 14px; border: 1px solid rgba(255,255,255,.12);
+    border-radius: 7px; background: rgba(255,255,255,.05);
+    color: rgba(255,255,255,.6); font-size: .78rem; font-weight: 600;
+    cursor: pointer; transition: all .2s ease; font-family: inherit;
+}
+.pine-gen__action-btn:hover { background: rgba(255,255,255,.1); color: #fff; }
+
+.pine-gen__action-btn--download {
+    background: rgba(245,158,11,.15); border-color: rgba(245,158,11,.3); color: #fbbf24;
+}
+.pine-gen__action-btn--download:hover { background: rgba(245,158,11,.25); color: #fff; }
+
+/* Code area */
+.pine-gen__code-area {
+    flex: 1; overflow-y: auto; overflow-x: auto;
+    padding: 0; min-height: 0;
+}
+
+.pine-gen__code-area::-webkit-scrollbar { width: 8px; height: 8px; }
+.pine-gen__code-area::-webkit-scrollbar-track { background: rgba(255,255,255,.03); }
+.pine-gen__code-area::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 4px; }
+.pine-gen__code-area::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.2); }
+
+.pine-gen__code-pre {
+    margin: 0; padding: 20px 24px;
+    font-family: 'Fira Code', 'Cascadia Code', 'Source Code Pro', monospace;
+    font-size: .82rem; line-height: 1.7; color: #cbd5e1;
+    white-space: pre; word-break: normal; tab-size: 4;
+    counter-reset: line;
+}
+
+.pine-gen__code-pre .code-line { display: block; }
+.pine-gen__code-pre .code-line::before {
+    counter-increment: line; content: counter(line);
+    display: inline-block; width: 36px; margin-right: 18px;
+    text-align: right; color: rgba(255,255,255,.12);
+    font-size: .75rem; user-select: none;
+}
+
+/* Pine Script syntax colors */
+.pine-gen__code-pre .tok-comment  { color: #6b7280; font-style: italic; }
+.pine-gen__code-pre .tok-keyword  { color: #c084fc; }
+.pine-gen__code-pre .tok-builtin  { color: #60a5fa; }
+.pine-gen__code-pre .tok-function { color: #34d399; }
+.pine-gen__code-pre .tok-string   { color: #fbbf24; }
+.pine-gen__code-pre .tok-number   { color: #fb923c; }
+.pine-gen__code-pre .tok-type     { color: #f472b6; }
+.pine-gen__code-pre .tok-const    { color: #38bdf8; }
+.pine-gen__code-pre .tok-annotation { color: #f87171; }
+.pine-gen__code-pre .tok-symbol   { color: #94a3b8; }
+
+/* States */
+.pine-gen__empty-state, .pine-gen__loading {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    height: 100%; min-height: 340px;
+    text-align: center; padding: 40px 30px;
+    color: rgba(255,255,255,.3);
+}
+
+.pine-gen__empty-icon {
+    width: 80px; height: 80px;
+    background: rgba(245,158,11,.08); border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem; margin-bottom: 20px;
+    color: rgba(245,158,11,.35);
+}
+
+.pine-gen__empty-title { font-size: 1.15rem; font-weight: 700; color: rgba(255,255,255,.5); margin-bottom: 10px; }
+.pine-gen__empty-desc { font-size: .9rem; line-height: 1.5; max-width: 320px; }
+
+.pine-gen__spinner {
+    width: 44px; height: 44px;
+    border: 3px solid rgba(245,158,11,.2); border-top-color: #f59e0b;
+    border-radius: 50%; animation: pine-spin .8s linear infinite;
+    margin-bottom: 18px;
+}
+@keyframes pine-spin { to { transform: rotate(360deg); } }
+
+.pine-gen__loading-text { color: rgba(255,255,255,.45); font-size: .92rem; font-weight: 500; }
+.pine-gen__loading-sub { color: rgba(255,255,255,.25); font-size: .8rem; margin-top: 4px; }
+
+/* Status bar */
+.pine-gen__output-status {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 18px;
+    border-top: 1px solid rgba(255,255,255,.06);
+    background: rgba(255,255,255,.02);
+    font-size: .78rem; color: rgba(255,255,255,.35); flex-shrink: 0;
+}
+.pine-gen__status-left { display: flex; align-items: center; gap: 8px; }
+.pine-gen__status-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.15); }
+.pine-gen__status-dot.active { background: #f59e0b; box-shadow: 0 0 6px #f59e0b; animation: pine-pulse 2s ease-in-out infinite; }
+
+/* Features */
+.pine-gen__features {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 20px; margin-top: 48px;
+}
+
+.pine-gen__feature {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 12px; padding: 24px 20px;
+    text-align: center; transition: all .3s ease;
+}
+.pine-gen__feature:hover {
+    background: rgba(255,255,255,.06);
+    border-color: rgba(245,158,11,.2);
+    transform: translateY(-3px);
+}
+
+.pine-gen__feature-icon {
+    width: 48px; height: 48px; margin: 0 auto 14px;
+    background: rgba(245,158,11,.1); border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; color: #fbbf24;
+}
+.pine-gen__feature-title { font-size: .92rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.pine-gen__feature-desc { font-size: .8rem; color: rgba(255,255,255,.4); line-height: 1.4; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .pine-gen__body { grid-template-columns: 1fr; }
+    .pine-gen__output-panel { height: 500px; }
+    .pine-gen__features { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .pine-gen { padding: 70px 0 60px; }
+    .pine-gen__features { grid-template-columns: 1fr 1fr; gap: 14px; }
+    .pine-gen__submit-row { flex-direction: column; align-items: stretch; }
+    .pine-gen__submit-btn { justify-content: center; }
+    .pine-gen__output-panel { height: 450px; }
+    .pine-gen__type-row { flex-wrap: wrap; }
+}
+
+@media (max-width: 480px) {
+    .pine-gen__container { padding: 0 16px; }
+    .pine-gen__features { grid-template-columns: 1fr; }
+    .pine-gen__output-panel { height: 400px; }
+}
